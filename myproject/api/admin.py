@@ -1,3 +1,5 @@
 from django.contrib import admin
+from .models import AsicDevice, AsicMetric
 
-# Register your models here.
+admin.site.register(AsicDevice)
+admin.site.register(AsicMetric)

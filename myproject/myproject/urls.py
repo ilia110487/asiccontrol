@@ -16,8 +16,12 @@ Including another URLconf
 """
 from django.urls import path, include
 from django.views.generic import TemplateView
+from django.contrib import admin
+from django.urls import path, include
 
 urlpatterns = [
     path('api/', include('api.urls')),  # Подключение API
     path('', TemplateView.as_view(template_name='index.html')),  # Главная страница React
+    path('admin/', admin.site.urls),  # Добавляем маршрут для /admin
+    path('api/', include('api.urls')),  # Подключение маршрутов из приложения api
 ]

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ASIC Miner Data</title>
+</head>
+<body>
+    <h1>ASIC Miner Data</h1>
+    {% if miner_data.error %}
+        <p style="color: red;">{{ miner_data.error }}</p>
+    {% else %}
+        <h2>General Information</h2>
+        <p>Miner Version: {{ miner_data.miner_version }}</p>
+        <p>Compile Time: {{ miner_data.compile_time }}</p>
+        <p>Miner Type: {{ miner_data.miner_type }}</p>
+
+        <h2>Statistics</h2>
+        <p>Elapsed Time: {{ miner_data.elapsed_time }}</p>
+        <p>Hashrate (5s): {{ miner_data.hashrate_5s }}</p>
+        <p>Hashrate (30m): {{ miner_data.hashrate_30m }}</p>
+        <p>Hashrate (Average): {{ miner_data.hashrate_avg }}</p>
+
+        <h2>Fan Speeds</h2>
+        <ul>
+            {% for fan, speed in miner_data.fan_speeds.items %}
+                <li>{{ fan }}: {{ speed }}</li>
+            {% endfor %}
+        </ul>
+
+        <h2>Chain Information</h2>
+        <ul>
+            {% for chain in miner_data.chains %}
+                <li>
+                    Chain {{ chain.index }} - Frequency: {{ chain.freq_avg }},
+                    Real Rate: {{ chain.rate_real }}, Ideal Rate: {{ chain.rate_ideal }}
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+</body>
+</html>
