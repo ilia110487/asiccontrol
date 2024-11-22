@@ -1,0 +1,19 @@
+2024-11-22 18:42:30.176 [info] (Client) Pylance async client (2024.11.3) started with python extension (2024.20.0)
+2024-11-22 18:42:31.240 [info] [Info  - 6:42:31 PM] (6237) Server root directory: file:///home/ilia/.vscode-server/extensions/ms-python.vscode-pylance-2024.11.3/dist
+2024-11-22 18:42:31.241 [info] [Info  - 6:42:31 PM] (6237) Pylance language server 2024.11.3 (pyright version 1.1.386, commit 4180fa21) starting
+2024-11-22 18:42:31.241 [info] [Info  - 6:42:31 PM] (6237) Starting service instance "myproject"
+2024-11-22 18:42:31.391 [info] [Info  - 6:42:31 PM] (6237) Setting environmentName for service "myproject": "/home/ilia/myproject/venv/bin/python"
+2024-11-22 18:42:31.392 [info] [Info  - 6:42:31 PM] (6237) No include entries specified; assuming /home/ilia/myproject
+2024-11-22 18:42:31.394 [info] [Info  - 6:42:31 PM] (6237) Auto-excluding **/node_modules
+2024-11-22 18:42:31.394 [info] [Info  - 6:42:31 PM] (6237) Auto-excluding **/__pycache__
+2024-11-22 18:42:31.395 [info] [Info  - 6:42:31 PM] (6237) Auto-excluding **/.*
+2024-11-22 18:42:31.569 [info] [Info  - 6:42:31 PM] (6237) Found 6 source files
+2024-11-22 18:42:32.867 [info] [Info  - 6:42:32 PM] (6237) Background analysis(1) root directory: file:///home/ilia/.vscode-server/extensions/ms-python.vscode-pylance-2024.11.3/dist
+2024-11-22 18:42:32.874 [info] [Info  - 6:42:32 PM] (6237) Background analysis(1) started
+2024-11-22 18:42:33.063 [info] [Info  - 6:42:33 PM] (6237) Indexer background runner(2) root directory: file:///home/ilia/.vscode-server/extensions/ms-python.vscode-pylance-2024.11.3/dist (index)
+2024-11-22 18:42:33.063 [info] [Info  - 6:42:33 PM] (6237) Indexing(2) started
+2024-11-22 18:42:35.054 [info] [Info  - 6:42:35 PM] (6237) scanned(2) 81 files over 1 exec env
+2024-11-22 18:42:38.463 [info] [Info  - 6:42:38 PM] (6237) [IDX(2)] Long operation: index execution environment file:///home/ilia/myproject (2876ms)
+2024-11-22 18:42:38.508 [info] [Info  - 6:42:38 PM] (6237) [IDX(2)] Long operation: index packages file:///home/ilia/myproject (2934ms)
+2024-11-22 18:42:38.508 [info] [Info  - 6:42:38 PM] (6237) indexed(2) 81 files over 1 exec env
+2024-11-22 18:42:38.610 [info] [Info  - 6:42:38 PM] (6237) Indexing finished(2).

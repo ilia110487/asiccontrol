@@ -1,0 +1,7 @@
+2024-11-22 18:38:36.704 [info] Revived process, old id 15a499e7b5a9fc122850474d4023e596-4 -> new id 1
+2024-11-22 18:38:36.704 [info] Revived process, old id 15a499e7b5a9fc122850474d4023e596-6 -> new id 2
+2024-11-22 18:41:22.211 [info] Expanding terminal instance, old id 15a499e7b5a9fc122850474d4023e596-3 -> new id undefined
+2024-11-22 18:41:22.211 [warning] Couldn't get layout info, a terminal was probably disconnected Could not find pty 3 on pty host
+2024-11-22 18:48:15.155 [info] Expanding terminal instance, old id 15a499e7b5a9fc122850474d4023e596-4 -> new id 1
+2024-11-22 18:48:18.289 [warning] Persistent process "1": Process had no disconnect runners but was an orphan
+2024-11-22 18:48:18.289 [info] Persistent process reconnection "1"

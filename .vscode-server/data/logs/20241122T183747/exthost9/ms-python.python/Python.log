@@ -1,0 +1,252 @@
+2024-11-22 18:48:21.077 [info] Experiment 'pythonRecommendTensorboardExt' is active
+2024-11-22 18:48:21.077 [info] Experiment 'pythonTerminalEnvVarActivation' is active
+2024-11-22 18:48:21.077 [info] Experiment 'pythonTestAdapter' is active
+2024-11-22 18:48:21.077 [warning] Dir "/home/ilia/myproject/.pixi/envs" is not watchable (directory does not exist)
+2024-11-22 18:48:21.077 [warning] Failed to check if /home/ilia/myproject/venv/bin/python is an executable [Error: ENOENT: no such file or directory, lstat '/home/ilia/myproject/venv/bin/python'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'lstat',
+  path: '/home/ilia/myproject/venv/bin/python'
+}
+2024-11-22 18:48:21.193 [info] > pyenv which python
+2024-11-22 18:48:21.193 [info] cwd: .
+2024-11-22 18:48:21.232 [warning] Identifier for virt-virtualenv failed to identify /home/ilia/myproject/venv/bin/python [Error: ENOENT: no such file or directory, scandir '/home/ilia/myproject/venv/bin'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'scandir',
+  path: '/home/ilia/myproject/venv/bin'
+}
+2024-11-22 18:48:21.285 [warning] Failed to check if /home/ilia/myproject/venv/bin/python is an executable [Error: ENOENT: no such file or directory, lstat '/home/ilia/myproject/venv/bin/python'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'lstat',
+  path: '/home/ilia/myproject/venv/bin/python'
+}
+2024-11-22 18:48:21.286 [warning] Failed to check if /home/ilia/myproject/venv/bin/python is an executable [Error: ENOENT: no such file or directory, lstat '/home/ilia/myproject/venv/bin/python'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'lstat',
+  path: '/home/ilia/myproject/venv/bin/python'
+}
+2024-11-22 18:48:21.305 [info] > ./venv/bin/python -I ~/.vscode-server/extensions/ms-python.python-2024.20.0-linux-x64/python_files/get_output_via_markers.py ~/.vscode-server/extensions/ms-python.python-2024.20.0-linux-x64/python_files/interpreterInfo.py
+2024-11-22 18:48:21.316 [warning] Identifier for virt-virtualenv failed to identify /home/ilia/myproject/venv/bin/python [Error: ENOENT: no such file or directory, scandir '/home/ilia/myproject/venv/bin'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'scandir',
+  path: '/home/ilia/myproject/venv/bin'
+}
+2024-11-22 18:48:21.317 [warning] Identifier for virt-virtualenv failed to identify /home/ilia/myproject/venv/bin/python [Error: ENOENT: no such file or directory, scandir '/home/ilia/myproject/venv/bin'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'scandir',
+  path: '/home/ilia/myproject/venv/bin'
+}
+2024-11-22 18:48:21.324 [error] [Error: Command failed: /home/ilia/myproject/venv/bin/python -I /home/ilia/.vscode-server/extensions/ms-python.python-2024.20.0-linux-x64/python_files/get_output_via_markers.py /home/ilia/.vscode-server/extensions/ms-python.python-2024.20.0-linux-x64/python_files/interpreterInfo.py
+/bin/sh: 1: /home/ilia/myproject/venv/bin/python: not found
+
+	at genericNodeError (node:internal/errors:984:15)
+	at wrappedFn (node:internal/errors:538:14)
+	at ChildProcess.exithandler (node:child_process:422:12)
+	at ChildProcess.emit (node:events:531:35)
+	at maybeClose (node:internal/child_process:1105:16)
+	at Socket.<anonymous> (node:internal/child_process:457:11)
+	at Socket.emit (node:events:519:28)
+	at Pipe.<anonymous> (node:net:339:12)] {
+  code: 127,
+  killed: false,
+  signal: null,
+  cmd: '/home/ilia/myproject/venv/bin/python -I /home/ilia/.vscode-server/extensions/ms-python.python-2024.20.0-linux-x64/python_files/get_output_via_markers.py /home/ilia/.vscode-server/extensions/ms-python.python-2024.20.0-linux-x64/python_files/interpreterInfo.py'
+}
+2024-11-22 18:48:22.257 [info] > ./venv/bin/python -I ~/.vscode-server/extensions/ms-python.python-2024.20.0-linux-x64/python_files/get_output_via_markers.py ~/.vscode-server/extensions/ms-python.python-2024.20.0-linux-x64/python_files/interpreterInfo.py
+2024-11-22 18:48:22.261 [error] [Error: Command failed: /home/ilia/myproject/venv/bin/python -I /home/ilia/.vscode-server/extensions/ms-python.python-2024.20.0-linux-x64/python_files/get_output_via_markers.py /home/ilia/.vscode-server/extensions/ms-python.python-2024.20.0-linux-x64/python_files/interpreterInfo.py
+/bin/sh: 1: /home/ilia/myproject/venv/bin/python: not found
+
+	at genericNodeError (node:internal/errors:984:15)
+	at wrappedFn (node:internal/errors:538:14)
+	at ChildProcess.exithandler (node:child_process:422:12)
+	at ChildProcess.emit (node:events:531:35)
+	at maybeClose (node:internal/child_process:1105:16)
+	at ChildProcess._handle.onexit (node:internal/child_process:305:5)] {
+  code: 127,
+  killed: false,
+  signal: null,
+  cmd: '/home/ilia/myproject/venv/bin/python -I /home/ilia/.vscode-server/extensions/ms-python.python-2024.20.0-linux-x64/python_files/get_output_via_markers.py /home/ilia/.vscode-server/extensions/ms-python.python-2024.20.0-linux-x64/python_files/interpreterInfo.py'
+}
+2024-11-22 18:48:22.313 [warning] Failed to check if /home/ilia/myproject/venv/bin/python is an executable [Error: ENOENT: no such file or directory, lstat '/home/ilia/myproject/venv/bin/python'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'lstat',
+  path: '/home/ilia/myproject/venv/bin/python'
+}
+2024-11-22 18:48:22.345 [warning] Failed to check if /home/ilia/myproject/venv/bin/python is an executable [Error: ENOENT: no such file or directory, lstat '/home/ilia/myproject/venv/bin/python'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'lstat',
+  path: '/home/ilia/myproject/venv/bin/python'
+}
+2024-11-22 18:48:22.359 [warning] Identifier for virt-virtualenv failed to identify /home/ilia/myproject/venv/bin/python [Error: ENOENT: no such file or directory, scandir '/home/ilia/myproject/venv/bin'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'scandir',
+  path: '/home/ilia/myproject/venv/bin'
+}
+2024-11-22 18:48:22.381 [warning] Identifier for virt-virtualenv failed to identify /home/ilia/myproject/venv/bin/python [Error: ENOENT: no such file or directory, scandir '/home/ilia/myproject/venv/bin'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'scandir',
+  path: '/home/ilia/myproject/venv/bin'
+}
+2024-11-22 18:48:22.401 [warning] Failed to check if /home/ilia/myproject/venv/bin/python is an executable [Error: ENOENT: no such file or directory, lstat '/home/ilia/myproject/venv/bin/python'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'lstat',
+  path: '/home/ilia/myproject/venv/bin/python'
+}
+2024-11-22 18:48:22.411 [warning] Identifier for virt-virtualenv failed to identify /home/ilia/myproject/venv/bin/python [Error: ENOENT: no such file or directory, scandir '/home/ilia/myproject/venv/bin'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'scandir',
+  path: '/home/ilia/myproject/venv/bin'
+}
+2024-11-22 18:48:23.599 [info] Starting Pylance language server.
+2024-11-22 18:48:23.607 [warning] Failed to check if /home/ilia/myproject/venv/bin/python is an executable [Error: ENOENT: no such file or directory, lstat '/home/ilia/myproject/venv/bin/python'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'lstat',
+  path: '/home/ilia/myproject/venv/bin/python'
+}
+2024-11-22 18:48:23.616 [warning] Failed to check if /home/ilia/myproject/venv/bin/python is an executable [Error: ENOENT: no such file or directory, lstat '/home/ilia/myproject/venv/bin/python'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'lstat',
+  path: '/home/ilia/myproject/venv/bin/python'
+}
+2024-11-22 18:48:23.634 [warning] Identifier for virt-virtualenv failed to identify /home/ilia/myproject/venv/bin/python [Error: ENOENT: no such file or directory, scandir '/home/ilia/myproject/venv/bin'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'scandir',
+  path: '/home/ilia/myproject/venv/bin'
+}
+2024-11-22 18:48:23.647 [warning] Identifier for virt-virtualenv failed to identify /home/ilia/myproject/venv/bin/python [Error: ENOENT: no such file or directory, scandir '/home/ilia/myproject/venv/bin'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'scandir',
+  path: '/home/ilia/myproject/venv/bin'
+}
+2024-11-22 18:48:23.667 [warning] Failed to check if /home/ilia/myproject/venv/bin/python is an executable [Error: ENOENT: no such file or directory, lstat '/home/ilia/myproject/venv/bin/python'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'lstat',
+  path: '/home/ilia/myproject/venv/bin/python'
+}
+2024-11-22 18:48:23.673 [warning] Identifier for virt-virtualenv failed to identify /home/ilia/myproject/venv/bin/python [Error: ENOENT: no such file or directory, scandir '/home/ilia/myproject/venv/bin'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'scandir',
+  path: '/home/ilia/myproject/venv/bin'
+}
+2024-11-22 18:48:24.881 [warning] Failed to check if /home/ilia/myproject/venv/bin/python is an executable [Error: ENOENT: no such file or directory, lstat '/home/ilia/myproject/venv/bin/python'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'lstat',
+  path: '/home/ilia/myproject/venv/bin/python'
+}
+2024-11-22 18:48:24.887 [warning] Identifier for virt-virtualenv failed to identify /home/ilia/myproject/venv/bin/python [Error: ENOENT: no such file or directory, scandir '/home/ilia/myproject/venv/bin'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'scandir',
+  path: '/home/ilia/myproject/venv/bin'
+}
+2024-11-22 18:48:38.014 [warning] Failed to check if /home/ilia/myproject/venv/bin/python is an executable [Error: ENOENT: no such file or directory, lstat '/home/ilia/myproject/venv/bin/python'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'lstat',
+  path: '/home/ilia/myproject/venv/bin/python'
+}
+2024-11-22 18:48:38.018 [warning] Identifier for virt-virtualenv failed to identify /home/ilia/myproject/venv/bin/python [Error: ENOENT: no such file or directory, scandir '/home/ilia/myproject/venv/bin'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'scandir',
+  path: '/home/ilia/myproject/venv/bin'
+}
+2024-11-22 18:48:38.036 [warning] Failed to check if /home/ilia/myproject/venv/bin/python is an executable [Error: ENOENT: no such file or directory, lstat '/home/ilia/myproject/venv/bin/python'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'lstat',
+  path: '/home/ilia/myproject/venv/bin/python'
+}
+2024-11-22 18:48:38.040 [warning] Identifier for virt-virtualenv failed to identify /home/ilia/myproject/venv/bin/python [Error: ENOENT: no such file or directory, scandir '/home/ilia/myproject/venv/bin'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'scandir',
+  path: '/home/ilia/myproject/venv/bin'
+}
+2024-11-22 18:55:53.145 [info] > hatch env show --json
+2024-11-22 18:55:53.145 [info] cwd: .
+2024-11-22 18:55:53.182 [info] > ./myenv/bin/python -I ~/.vscode-server/extensions/ms-python.python-2024.20.0-linux-x64/python_files/get_output_via_markers.py ~/.vscode-server/extensions/ms-python.python-2024.20.0-linux-x64/python_files/interpreterInfo.py
+2024-11-22 18:55:53.183 [info] Environments refresh paths discovered: 95 milliseconds
+2024-11-22 18:55:53.263 [info] Environments refresh finished (event): 176 milliseconds
+2024-11-22 18:55:53.269 [warning] Failed to check if /home/ilia/myproject/venv/bin/python is an executable [Error: ENOENT: no such file or directory, lstat '/home/ilia/myproject/venv/bin/python'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'lstat',
+  path: '/home/ilia/myproject/venv/bin/python'
+}
+2024-11-22 18:55:53.278 [warning] Identifier for virt-virtualenv failed to identify /home/ilia/myproject/venv/bin/python [Error: ENOENT: no such file or directory, scandir '/home/ilia/myproject/venv/bin'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'scandir',
+  path: '/home/ilia/myproject/venv/bin'
+}
+2024-11-22 18:55:53.309 [info] > ./venv/bin/python -I ~/.vscode-server/extensions/ms-python.python-2024.20.0-linux-x64/python_files/get_output_via_markers.py ~/.vscode-server/extensions/ms-python.python-2024.20.0-linux-x64/python_files/interpreterInfo.py
+2024-11-22 18:55:53.313 [error] [Error: Command failed: /home/ilia/myproject/venv/bin/python -I /home/ilia/.vscode-server/extensions/ms-python.python-2024.20.0-linux-x64/python_files/get_output_via_markers.py /home/ilia/.vscode-server/extensions/ms-python.python-2024.20.0-linux-x64/python_files/interpreterInfo.py
+/bin/sh: 1: /home/ilia/myproject/venv/bin/python: not found
+
+	at genericNodeError (node:internal/errors:984:15)
+	at wrappedFn (node:internal/errors:538:14)
+	at ChildProcess.exithandler (node:child_process:422:12)
+	at ChildProcess.emit (node:events:531:35)
+	at maybeClose (node:internal/child_process:1105:16)
+	at ChildProcess._handle.onexit (node:internal/child_process:305:5)] {
+  code: 127,
+  killed: false,
+  signal: null,
+  cmd: '/home/ilia/myproject/venv/bin/python -I /home/ilia/.vscode-server/extensions/ms-python.python-2024.20.0-linux-x64/python_files/get_output_via_markers.py /home/ilia/.vscode-server/extensions/ms-python.python-2024.20.0-linux-x64/python_files/interpreterInfo.py'
+}
+2024-11-22 18:55:55.325 [info] > ./venv/bin/python -I ~/.vscode-server/extensions/ms-python.python-2024.20.0-linux-x64/python_files/get_output_via_markers.py ~/.vscode-server/extensions/ms-python.python-2024.20.0-linux-x64/python_files/interpreterInfo.py
+2024-11-22 18:55:55.329 [error] [Error: Command failed: /home/ilia/myproject/venv/bin/python -I /home/ilia/.vscode-server/extensions/ms-python.python-2024.20.0-linux-x64/python_files/get_output_via_markers.py /home/ilia/.vscode-server/extensions/ms-python.python-2024.20.0-linux-x64/python_files/interpreterInfo.py
+/bin/sh: 1: /home/ilia/myproject/venv/bin/python: not found
+
+	at genericNodeError (node:internal/errors:984:15)
+	at wrappedFn (node:internal/errors:538:14)
+	at ChildProcess.exithandler (node:child_process:422:12)
+	at ChildProcess.emit (node:events:531:35)
+	at maybeClose (node:internal/child_process:1105:16)
+	at ChildProcess._handle.onexit (node:internal/child_process:305:5)] {
+  code: 127,
+  killed: false,
+  signal: null,
+  cmd: '/home/ilia/myproject/venv/bin/python -I /home/ilia/.vscode-server/extensions/ms-python.python-2024.20.0-linux-x64/python_files/get_output_via_markers.py /home/ilia/.vscode-server/extensions/ms-python.python-2024.20.0-linux-x64/python_files/interpreterInfo.py'
+}
+2024-11-22 18:56:07.029 [info] Discover tests for workspace name: myproject - uri: /home/ilia/myproject
+2024-11-22 18:56:07.031 [info] Python interpreter path: ./myenv/bin/python
+2024-11-22 18:56:07.084 [info] > . ./myenv/bin/activate && echo 'e8b39361-0157-4923-80e1-22d70d46dee6' && python ~/.vscode-server/extensions/ms-python.python-2024.20.0-linux-x64/python_files/printEnvVariables.py
+2024-11-22 18:56:07.085 [info] shell: bash
+2024-11-22 18:56:07.137 [info] > /bin/python3 ~/.vscode-server/extensions/ms-python.python-2024.20.0-linux-x64/python_files/printEnvVariables.py
+2024-11-22 18:56:07.137 [info] shell: bash
+2024-11-22 18:56:07.190 [info] Setting environment variable VIRTUAL_ENV in collection to /home/ilia/myproject/myenv {"applyAtShellIntegration":true,"applyAtProcessCreation":true}
+2024-11-22 18:56:07.190 [info] Setting environment variable VIRTUAL_ENV_PROMPT in collection to (myenv)  {"applyAtShellIntegration":true,"applyAtProcessCreation":true}
+2024-11-22 18:56:07.191 [info] Prepending environment variable PS1 in collection with (myenv)  {"applyAtShellIntegration":true,"applyAtProcessCreation":false}
+2024-11-22 18:56:07.191 [info] Prepending environment variable PATH in collection with /home/ilia/.vscode-server/extensions/ms-python.python-2024.20.0-linux-x64/python_files/deactivate/bash:/home/ilia/myproject/myenv/bin: {"applyAtShellIntegration":true,"applyAtProcessCreation":true}
+2024-11-22 18:56:07.192 [info] Send text to terminal: /bin/python3 /home/ilia/.vscode-server/extensions/ms-python.python-2024.20.0-linux-x64/python_files/printEnvVariablesToFile.py /home/ilia/.vscode-server/extensions/ms-python.python-2024.20.0-linux-x64/python_files/deactivate/bash/envVars.txt
+2024-11-22 19:01:21.654 [info] Discover tests for workspace name: myproject - uri: /home/ilia/myproject/frontend/node_modules/rollup-plugin-terser/node_modules/serialize-javascript/.vscode/settings.json
+2024-11-22 19:01:24.114 [info] Discover tests for workspace name: myproject - uri: /home/ilia/myproject/frontend/node_modules/postcss-initial/.vscode/settings.json
+2024-11-22 19:01:24.528 [info] Discover tests for workspace name: myproject - uri: /home/ilia/myproject/frontend/node_modules/detect-port-alt/.vscode/settings.json
+2024-11-22 19:05:54.752 [info] Discover tests for workspace name: myproject - uri: /home/ilia/myproject/myproject/settings.py
+2024-11-22 19:09:11.782 [info] Discover tests for workspace name: myproject - uri: /home/ilia/myproject/myproject/settings.py
+2024-11-22 19:10:04.828 [info] Discover tests for workspace name: myproject - uri: /home/ilia/myproject/api/views.py
+2024-11-22 19:10:39.850 [info] Discover tests for workspace name: myproject - uri: /home/ilia/myproject/api/urls.py
+2024-11-22 19:11:06.450 [info] Discover tests for workspace name: myproject - uri: /home/ilia/myproject/api/urls.py
+2024-11-22 19:14:17.991 [info] Discover tests for workspace name: myproject - uri: /home/ilia/myproject/myproject/settings.py
+2024-11-22 19:16:43.994 [info] Discover tests for workspace name: myproject - uri: /home/ilia/myproject/myproject/settings.py
+2024-11-22 19:18:26.408 [info] Discover tests for workspace name: myproject - uri: /home/ilia/myproject/myproject/urls.py

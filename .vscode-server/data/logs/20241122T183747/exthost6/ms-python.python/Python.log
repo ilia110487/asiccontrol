@@ -1,0 +1,183 @@
+2024-11-22 18:42:27.278 [info] Experiment 'pythonRecommendTensorboardExt' is active
+2024-11-22 18:42:27.278 [info] Experiment 'pythonTerminalEnvVarActivation' is active
+2024-11-22 18:42:27.278 [info] Experiment 'pythonTestAdapter' is active
+2024-11-22 18:42:27.278 [warning] Dir "/home/ilia/myproject/.pixi/envs" is not watchable (directory does not exist)
+2024-11-22 18:42:27.278 [warning] Failed to check if /home/ilia/myproject/venv/bin/python is an executable [Error: ENOENT: no such file or directory, lstat '/home/ilia/myproject/venv/bin/python'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'lstat',
+  path: '/home/ilia/myproject/venv/bin/python'
+}
+2024-11-22 18:42:27.292 [warning] Identifier for virt-virtualenv failed to identify /home/ilia/myproject/venv/bin/python [Error: ENOENT: no such file or directory, scandir '/home/ilia/myproject/venv/bin'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'scandir',
+  path: '/home/ilia/myproject/venv/bin'
+}
+2024-11-22 18:42:27.524 [info] > ./venv/bin/python -I ~/.vscode-server/extensions/ms-python.python-2024.20.0-linux-x64/python_files/get_output_via_markers.py ~/.vscode-server/extensions/ms-python.python-2024.20.0-linux-x64/python_files/interpreterInfo.py
+2024-11-22 18:42:27.540 [info] > pyenv which python
+2024-11-22 18:42:27.540 [info] cwd: .
+2024-11-22 18:42:27.577 [error] [Error: Command failed: /home/ilia/myproject/venv/bin/python -I /home/ilia/.vscode-server/extensions/ms-python.python-2024.20.0-linux-x64/python_files/get_output_via_markers.py /home/ilia/.vscode-server/extensions/ms-python.python-2024.20.0-linux-x64/python_files/interpreterInfo.py
+/bin/sh: 1: /home/ilia/myproject/venv/bin/python: not found
+
+	at genericNodeError (node:internal/errors:984:15)
+	at wrappedFn (node:internal/errors:538:14)
+	at ChildProcess.exithandler (node:child_process:422:12)
+	at ChildProcess.emit (node:events:531:35)
+	at maybeClose (node:internal/child_process:1105:16)
+	at Socket.<anonymous> (node:internal/child_process:457:11)
+	at Socket.emit (node:events:519:28)
+	at Pipe.<anonymous> (node:net:339:12)] {
+  code: 127,
+  killed: false,
+  signal: null,
+  cmd: '/home/ilia/myproject/venv/bin/python -I /home/ilia/.vscode-server/extensions/ms-python.python-2024.20.0-linux-x64/python_files/get_output_via_markers.py /home/ilia/.vscode-server/extensions/ms-python.python-2024.20.0-linux-x64/python_files/interpreterInfo.py'
+}
+2024-11-22 18:42:27.700 [warning] Failed to check if /home/ilia/myproject/venv/bin/python is an executable [Error: ENOENT: no such file or directory, lstat '/home/ilia/myproject/venv/bin/python'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'lstat',
+  path: '/home/ilia/myproject/venv/bin/python'
+}
+2024-11-22 18:42:27.702 [warning] Failed to check if /home/ilia/myproject/venv/bin/python is an executable [Error: ENOENT: no such file or directory, lstat '/home/ilia/myproject/venv/bin/python'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'lstat',
+  path: '/home/ilia/myproject/venv/bin/python'
+}
+2024-11-22 18:42:27.714 [warning] Identifier for virt-virtualenv failed to identify /home/ilia/myproject/venv/bin/python [Error: ENOENT: no such file or directory, scandir '/home/ilia/myproject/venv/bin'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'scandir',
+  path: '/home/ilia/myproject/venv/bin'
+}
+2024-11-22 18:42:27.714 [warning] Identifier for virt-virtualenv failed to identify /home/ilia/myproject/venv/bin/python [Error: ENOENT: no such file or directory, scandir '/home/ilia/myproject/venv/bin'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'scandir',
+  path: '/home/ilia/myproject/venv/bin'
+}
+2024-11-22 18:42:29.584 [info] > ./venv/bin/python -I ~/.vscode-server/extensions/ms-python.python-2024.20.0-linux-x64/python_files/get_output_via_markers.py ~/.vscode-server/extensions/ms-python.python-2024.20.0-linux-x64/python_files/interpreterInfo.py
+2024-11-22 18:42:29.588 [error] [Error: Command failed: /home/ilia/myproject/venv/bin/python -I /home/ilia/.vscode-server/extensions/ms-python.python-2024.20.0-linux-x64/python_files/get_output_via_markers.py /home/ilia/.vscode-server/extensions/ms-python.python-2024.20.0-linux-x64/python_files/interpreterInfo.py
+/bin/sh: 1: /home/ilia/myproject/venv/bin/python: not found
+
+	at genericNodeError (node:internal/errors:984:15)
+	at wrappedFn (node:internal/errors:538:14)
+	at ChildProcess.exithandler (node:child_process:422:12)
+	at ChildProcess.emit (node:events:531:35)
+	at maybeClose (node:internal/child_process:1105:16)
+	at ChildProcess._handle.onexit (node:internal/child_process:305:5)] {
+  code: 127,
+  killed: false,
+  signal: null,
+  cmd: '/home/ilia/myproject/venv/bin/python -I /home/ilia/.vscode-server/extensions/ms-python.python-2024.20.0-linux-x64/python_files/get_output_via_markers.py /home/ilia/.vscode-server/extensions/ms-python.python-2024.20.0-linux-x64/python_files/interpreterInfo.py'
+}
+2024-11-22 18:42:29.646 [warning] Failed to check if /home/ilia/myproject/venv/bin/python is an executable [Error: ENOENT: no such file or directory, lstat '/home/ilia/myproject/venv/bin/python'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'lstat',
+  path: '/home/ilia/myproject/venv/bin/python'
+}
+2024-11-22 18:42:29.653 [warning] Failed to check if /home/ilia/myproject/venv/bin/python is an executable [Error: ENOENT: no such file or directory, lstat '/home/ilia/myproject/venv/bin/python'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'lstat',
+  path: '/home/ilia/myproject/venv/bin/python'
+}
+2024-11-22 18:42:29.671 [warning] Identifier for virt-virtualenv failed to identify /home/ilia/myproject/venv/bin/python [Error: ENOENT: no such file or directory, scandir '/home/ilia/myproject/venv/bin'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'scandir',
+  path: '/home/ilia/myproject/venv/bin'
+}
+2024-11-22 18:42:29.672 [warning] Identifier for virt-virtualenv failed to identify /home/ilia/myproject/venv/bin/python [Error: ENOENT: no such file or directory, scandir '/home/ilia/myproject/venv/bin'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'scandir',
+  path: '/home/ilia/myproject/venv/bin'
+}
+2024-11-22 18:42:29.705 [warning] Failed to check if /home/ilia/myproject/venv/bin/python is an executable [Error: ENOENT: no such file or directory, lstat '/home/ilia/myproject/venv/bin/python'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'lstat',
+  path: '/home/ilia/myproject/venv/bin/python'
+}
+2024-11-22 18:42:29.737 [warning] Identifier for virt-virtualenv failed to identify /home/ilia/myproject/venv/bin/python [Error: ENOENT: no such file or directory, scandir '/home/ilia/myproject/venv/bin'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'scandir',
+  path: '/home/ilia/myproject/venv/bin'
+}
+2024-11-22 18:42:31.267 [info] Starting Pylance language server.
+2024-11-22 18:42:31.271 [warning] Failed to check if /home/ilia/myproject/venv/bin/python is an executable [Error: ENOENT: no such file or directory, lstat '/home/ilia/myproject/venv/bin/python'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'lstat',
+  path: '/home/ilia/myproject/venv/bin/python'
+}
+2024-11-22 18:42:31.282 [warning] Failed to check if /home/ilia/myproject/venv/bin/python is an executable [Error: ENOENT: no such file or directory, lstat '/home/ilia/myproject/venv/bin/python'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'lstat',
+  path: '/home/ilia/myproject/venv/bin/python'
+}
+2024-11-22 18:42:31.289 [warning] Identifier for virt-virtualenv failed to identify /home/ilia/myproject/venv/bin/python [Error: ENOENT: no such file or directory, scandir '/home/ilia/myproject/venv/bin'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'scandir',
+  path: '/home/ilia/myproject/venv/bin'
+}
+2024-11-22 18:42:31.301 [warning] Identifier for virt-virtualenv failed to identify /home/ilia/myproject/venv/bin/python [Error: ENOENT: no such file or directory, scandir '/home/ilia/myproject/venv/bin'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'scandir',
+  path: '/home/ilia/myproject/venv/bin'
+}
+2024-11-22 18:42:31.319 [warning] Failed to check if /home/ilia/myproject/venv/bin/python is an executable [Error: ENOENT: no such file or directory, lstat '/home/ilia/myproject/venv/bin/python'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'lstat',
+  path: '/home/ilia/myproject/venv/bin/python'
+}
+2024-11-22 18:42:31.328 [warning] Identifier for virt-virtualenv failed to identify /home/ilia/myproject/venv/bin/python [Error: ENOENT: no such file or directory, scandir '/home/ilia/myproject/venv/bin'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'scandir',
+  path: '/home/ilia/myproject/venv/bin'
+}
+2024-11-22 18:42:31.998 [warning] Failed to check if /home/ilia/myproject/venv/bin/python is an executable [Error: ENOENT: no such file or directory, lstat '/home/ilia/myproject/venv/bin/python'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'lstat',
+  path: '/home/ilia/myproject/venv/bin/python'
+}
+2024-11-22 18:42:32.006 [warning] Identifier for virt-virtualenv failed to identify /home/ilia/myproject/venv/bin/python [Error: ENOENT: no such file or directory, scandir '/home/ilia/myproject/venv/bin'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'scandir',
+  path: '/home/ilia/myproject/venv/bin'
+}
+2024-11-22 18:43:43.145 [warning] Failed to check if /home/ilia/myproject/venv/bin/python is an executable [Error: ENOENT: no such file or directory, lstat '/home/ilia/myproject/venv/bin/python'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'lstat',
+  path: '/home/ilia/myproject/venv/bin/python'
+}
+2024-11-22 18:43:43.154 [warning] Identifier for virt-virtualenv failed to identify /home/ilia/myproject/venv/bin/python [Error: ENOENT: no such file or directory, scandir '/home/ilia/myproject/venv/bin'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'scandir',
+  path: '/home/ilia/myproject/venv/bin'
+}
+2024-11-22 18:43:47.693 [warning] Failed to check if /home/ilia/myproject/venv/bin/python is an executable [Error: ENOENT: no such file or directory, lstat '/home/ilia/myproject/venv/bin/python'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'lstat',
+  path: '/home/ilia/myproject/venv/bin/python'
+}
+2024-11-22 18:43:47.705 [warning] Identifier for virt-virtualenv failed to identify /home/ilia/myproject/venv/bin/python [Error: ENOENT: no such file or directory, scandir '/home/ilia/myproject/venv/bin'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'scandir',
+  path: '/home/ilia/myproject/venv/bin'
+}

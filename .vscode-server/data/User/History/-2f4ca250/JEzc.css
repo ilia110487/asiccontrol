@@ -1,0 +1,26 @@
+.dashboard {
+    height: 100vh; /* Высота экрана */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.8); /* Полупрозрачный фон */
+    backdrop-filter: blur(5px); /* Эффект размытия */
+    color: white; /* Текст белого цвета */
+    padding: 20px; /* Отступы */
+    box-sizing: border-box; /* Учитываем отступы в размерах */
+}
+
+.dashboard h1 {
+    font-size: 2.5rem; /* Размер заголовка */
+    margin-bottom: 20px; /* Отступ снизу */
+    text-shadow: 0px 2px 4px rgba(255, 255, 255, 0.2); /* Лёгкая тень текста */
+}
+
+.dashboard p {
+    font-size: 1.2rem; /* Размер текста */
+    line-height: 1.5; /* Межстрочный интервал */
+    max-width: 600px; /* Максимальная ширина текста */
+    text-align: center; /* Выравнивание текста по центру */
+    color: #d0d0d0; /* Нежный серый цвет текста */
+}

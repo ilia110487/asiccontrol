@@ -1,0 +1,73 @@
+2024-11-22 18:37:48.060 [info] 
+
+
+
+
+2024-11-22 18:37:48.060 [info] Extension host agent started.
+2024-11-22 18:37:48.092 [info] Started initializing default profile extensions in extensions installation folder. file:///home/ilia/.vscode-server/extensions
+2024-11-22 18:37:48.139 [info] Completed initializing default profile extensions in extensions installation folder. file:///home/ilia/.vscode-server/extensions
+2024-11-22 18:37:48.149 [info] [127.0.0.1][0de522a9][ManagementConnection] New connection established.
+2024-11-22 18:37:48.688 [info] [127.0.0.1][7de72712][ExtensionHostConnection] New connection established.
+2024-11-22 18:37:48.709 [info] [127.0.0.1][7de72712][ExtensionHostConnection] <4921> Launched Extension Host Process.
+2024-11-22 18:37:57.313 [info] [127.0.0.1][0de522a9][ManagementConnection] The client has disconnected gracefully, so the connection will be disposed.
+2024-11-22 18:37:57.351 [info] [127.0.0.1][7de72712][ExtensionHostConnection] <4921> Extension Host Process exited with code: 0, signal: null.
+2024-11-22 18:37:59.696 [info] [127.0.0.1][9a15c1e0][ManagementConnection] New connection established.
+2024-11-22 18:38:00.196 [info] [127.0.0.1][3df3e8c4][ExtensionHostConnection] New connection established.
+2024-11-22 18:38:00.210 [info] [127.0.0.1][3df3e8c4][ExtensionHostConnection] <4991> Launched Extension Host Process.
+2024-11-22 18:38:09.947 [info] [127.0.0.1][9a15c1e0][ManagementConnection] The client has disconnected gracefully, so the connection will be disposed.
+2024-11-22 18:38:10.039 [info] [127.0.0.1][3df3e8c4][ExtensionHostConnection] <4991> Extension Host Process exited with code: 0, signal: null.
+2024-11-22 18:38:12.963 [info] [127.0.0.1][f08a2822][ManagementConnection] New connection established.
+2024-11-22 18:38:13.359 [info] [127.0.0.1][6eab4370][ExtensionHostConnection] New connection established.
+2024-11-22 18:38:13.365 [info] [127.0.0.1][6eab4370][ExtensionHostConnection] <5062> Launched Extension Host Process.
+2024-11-22 18:38:32.918 [info] [127.0.0.1][f08a2822][ManagementConnection] The client has disconnected gracefully, so the connection will be disposed.
+2024-11-22 18:38:32.997 [info] [127.0.0.1][6eab4370][ExtensionHostConnection] <5062> Extension Host Process exited with code: 0, signal: null.
+2024-11-22 18:38:36.213 [info] [127.0.0.1][57bc12fd][ManagementConnection] New connection established.
+2024-11-22 18:38:36.803 [info] [127.0.0.1][6ce057f2][ExtensionHostConnection] New connection established.
+2024-11-22 18:38:36.853 [info] [127.0.0.1][6ce057f2][ExtensionHostConnection] <5191> Launched Extension Host Process.
+2024-11-22 18:40:07.829 [info] [127.0.0.1][57bc12fd][ManagementConnection] The client has disconnected gracefully, so the connection will be disposed.
+2024-11-22 18:40:07.907 [info] [127.0.0.1][6ce057f2][ExtensionHostConnection] <5191> Extension Host Process exited with code: 0, signal: null.
+2024-11-22 18:40:11.241 [info] [127.0.0.1][5c41045e][ManagementConnection] New connection established.
+2024-11-22 18:40:11.773 [info] [127.0.0.1][7a408fe8][ExtensionHostConnection] New connection established.
+2024-11-22 18:40:11.797 [info] [127.0.0.1][7a408fe8][ExtensionHostConnection] <5555> Launched Extension Host Process.
+2024-11-22 18:41:18.935 [info] [127.0.0.1][5c41045e][ManagementConnection] The client has disconnected gracefully, so the connection will be disposed.
+2024-11-22 18:41:19.010 [info] [127.0.0.1][7a408fe8][ExtensionHostConnection] <5555> Extension Host Process exited with code: 0, signal: null.
+2024-11-22 18:41:22.122 [info] [127.0.0.1][56b0b7ad][ManagementConnection] New connection established.
+2024-11-22 18:41:22.696 [info] [127.0.0.1][a9b8f288][ExtensionHostConnection] New connection established.
+2024-11-22 18:41:22.715 [info] [127.0.0.1][a9b8f288][ExtensionHostConnection] <5811> Launched Extension Host Process.
+2024-11-22 18:41:43.946 [info] Getting Manifest... ms-python.python
+2024-11-22 18:41:44.191 [info] Installing extension: ms-python.python {"isMachineScoped":false,"installOnlyNewlyAddedFromExtensionPack":true,"isApplicationScoped":false,"profileLocation":{"$mid":1,"fsPath":"/home/ilia/.vscode-server/extensions/extensions.json","external":"file:///home/ilia/.vscode-server/extensions/extensions.json","path":"/home/ilia/.vscode-server/extensions/extensions.json","scheme":"file"},"productVersion":{"version":"1.95.3","date":"2024-11-13T14:50:04.152Z"}}
+2024-11-22 18:41:44.786 [info] Getting Manifest... ms-python.vscode-pylance
+2024-11-22 18:41:44.853 [info] Getting Manifest... ms-python.debugpy
+2024-11-22 18:41:44.915 [info] Installing extension: ms-python.vscode-pylance {"isMachineScoped":false,"installOnlyNewlyAddedFromExtensionPack":true,"isApplicationScoped":false,"profileLocation":{"$mid":1,"fsPath":"/home/ilia/.vscode-server/extensions/extensions.json","external":"file:///home/ilia/.vscode-server/extensions/extensions.json","path":"/home/ilia/.vscode-server/extensions/extensions.json","scheme":"file"},"productVersion":{"version":"1.95.3","date":"2024-11-13T14:50:04.152Z"},"context":{"dependecyOrPackExtensionInstall":true}}
+2024-11-22 18:41:44.916 [info] Installing extension: ms-python.debugpy {"isMachineScoped":false,"installOnlyNewlyAddedFromExtensionPack":true,"isApplicationScoped":false,"profileLocation":{"$mid":1,"fsPath":"/home/ilia/.vscode-server/extensions/extensions.json","external":"file:///home/ilia/.vscode-server/extensions/extensions.json","path":"/home/ilia/.vscode-server/extensions/extensions.json","scheme":"file"},"productVersion":{"version":"1.95.3","date":"2024-11-13T14:50:04.152Z"},"context":{"dependecyOrPackExtensionInstall":true}}
+2024-11-22 18:41:50.540 [info] Extension signature verification result for ms-python.python: Success. Executed: true. Duration: 3660ms.
+2024-11-22 18:41:54.501 [info] Extension signature verification result for ms-python.debugpy: Success. Executed: true. Duration: 3146ms.
+2024-11-22 18:41:58.453 [info] Extracted extension to file:///home/ilia/.vscode-server/extensions/ms-python.debugpy-2024.12.0-linux-x64: ms-python.debugpy
+2024-11-22 18:41:58.468 [info] Renamed to /home/ilia/.vscode-server/extensions/ms-python.debugpy-2024.12.0-linux-x64
+2024-11-22 18:42:01.746 [info] Extracted extension to file:///home/ilia/.vscode-server/extensions/ms-python.python-2024.20.0-linux-x64: ms-python.python
+2024-11-22 18:42:01.765 [info] Renamed to /home/ilia/.vscode-server/extensions/ms-python.python-2024.20.0-linux-x64
+2024-11-22 18:42:05.134 [info] Extension signature verification result for ms-python.vscode-pylance: Success. Executed: true. Duration: 2622ms.
+2024-11-22 18:42:24.432 [info] Extracted extension to file:///home/ilia/.vscode-server/extensions/ms-python.vscode-pylance-2024.11.3: ms-python.vscode-pylance
+2024-11-22 18:42:24.452 [info] Renamed to /home/ilia/.vscode-server/extensions/ms-python.vscode-pylance-2024.11.3
+2024-11-22 18:42:24.500 [info] Extension installed successfully: ms-python.debugpy file:///home/ilia/.vscode-server/extensions/extensions.json
+2024-11-22 18:42:24.501 [info] Extension installed successfully: ms-python.python file:///home/ilia/.vscode-server/extensions/extensions.json
+2024-11-22 18:42:24.501 [info] Extension installed successfully: ms-python.vscode-pylance file:///home/ilia/.vscode-server/extensions/extensions.json
+2024-11-22 18:46:29.165 [info] [127.0.0.1][56b0b7ad][ManagementConnection] The client has disconnected gracefully, so the connection will be disposed.
+2024-11-22 18:46:29.314 [info] [127.0.0.1][a9b8f288][ExtensionHostConnection] <5811> Extension Host Process exited with code: 0, signal: null.
+2024-11-22 18:46:32.591 [info] [127.0.0.1][a6b2006c][ManagementConnection] New connection established.
+2024-11-22 18:46:33.120 [info] [127.0.0.1][6a400b41][ExtensionHostConnection] New connection established.
+2024-11-22 18:46:33.137 [info] [127.0.0.1][6a400b41][ExtensionHostConnection] <7246> Launched Extension Host Process.
+2024-11-22 18:47:03.878 [info] [127.0.0.1][a6b2006c][ManagementConnection] The client has disconnected gracefully, so the connection will be disposed.
+2024-11-22 18:47:03.960 [info] [127.0.0.1][6a400b41][ExtensionHostConnection] <7246> Extension Host Process exited with code: 0, signal: null.
+2024-11-22 18:47:07.265 [info] [127.0.0.1][c612d6f6][ManagementConnection] New connection established.
+2024-11-22 18:47:07.962 [info] [127.0.0.1][0ab223c2][ExtensionHostConnection] New connection established.
+2024-11-22 18:47:07.988 [info] [127.0.0.1][0ab223c2][ExtensionHostConnection] <7398> Launched Extension Host Process.
+2024-11-22 18:48:11.548 [info] [127.0.0.1][c612d6f6][ManagementConnection] The client has disconnected gracefully, so the connection will be disposed.
+2024-11-22 18:48:11.689 [info] [127.0.0.1][0ab223c2][ExtensionHostConnection] <7398> Extension Host Process exited with code: 0, signal: null.
+2024-11-22 18:48:15.120 [info] [127.0.0.1][19b2ca01][ManagementConnection] New connection established.
+2024-11-22 18:48:15.694 [info] [127.0.0.1][cc36dfb2][ExtensionHostConnection] New connection established.
+2024-11-22 18:48:15.706 [info] [127.0.0.1][cc36dfb2][ExtensionHostConnection] <7791> Launched Extension Host Process.
+2024-11-22 19:02:04.547 [warning] [File Watcher (node.js)] Watcher shutdown because watched path got deleted
+2024-11-22 21:54:11.643 [warning] No ptyHost heartbeat after 6 seconds
+2024-11-22 22:51:59.041 [info] [127.0.0.1][19b2ca01][ManagementConnection] The client has reconnected.
+2024-11-22 22:51:59.248 [info] [127.0.0.1][cc36dfb2][ExtensionHostConnection] The client has reconnected.

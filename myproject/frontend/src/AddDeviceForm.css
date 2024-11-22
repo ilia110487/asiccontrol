@@ -1,0 +1,66 @@
+.add-device-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(5px);
+    border-radius: 10px;
+    width: 100%;
+    max-width: 400px;
+    color: white;
+}
+
+.add-device-form label {
+    display: flex;
+    flex-direction: column;
+    font-size: 1rem;
+    gap: 5px;
+}
+
+.add-device-form input,
+.add-device-form select {
+    padding: 10px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    background: #2e2e2e;
+    color: white;
+}
+
+.add-device-form input::placeholder {
+    color: #bbbbbb;
+}
+
+.add-device-form .form-buttons {
+    display: flex;
+    justify-content: space-between;
+}
+
+.add-device-form .add-btn {
+    padding: 10px 20px;
+    background: #00ffc3;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out;
+    color: #121212;
+}
+
+.add-device-form .add-btn:hover {
+    background: #00cca3;
+}
+
+.add-device-form .cancel-btn {
+    padding: 10px 20px;
+    background: #ff4d4d;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out;
+    color: white;
+}
+
+.add-device-form .cancel-btn:hover {
+    background: #d43d3d;
+}

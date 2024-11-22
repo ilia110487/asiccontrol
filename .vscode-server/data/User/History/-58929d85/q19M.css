@@ -1,0 +1,44 @@
+.header {
+    display: flex; /* Горизонтальное выравнивание элементов */
+    justify-content: space-between; /* Размещаем логотип слева, кнопки справа */
+    align-items: center; /* Центрируем элементы по вертикали */
+    padding: 10px 20px; /* Внутренние отступы */
+    background-color: #121212; /* Цвет фона шапки */
+    color: white;
+    height: 60px; /* Фиксированная высота шапки */
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.5); /* Лёгкая тень */
+    position: fixed; /* Закрепляем шапку наверху экрана */
+    top: 0;
+    left: 0;
+    width: 100%; /* Полная ширина экрана */
+    z-index: 100; /* Шапка всегда выше других элементов */
+}
+
+
+.logo {
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.actions {
+    display: flex;
+    gap: 15px; /* Расстояние между кнопками */
+}
+
+.header-btn {
+    padding: 8px 15px;
+    background: transparent;
+    border: 1px solid #00ffc3;
+    border-radius: 5px;
+    color: #00ffc3;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+.header-btn:hover {
+    background: #00ffc3;
+    color: #121212;
+    transform: scale(1.05);
+}
