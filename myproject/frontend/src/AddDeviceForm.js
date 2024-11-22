@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./AddDeviceForm.css";
 
-const AddDeviceForm = ({ onCancel }) => {
+const AddDeviceForm = ({ onCancel, onAddDevice }) => {
     const [ip, setIp] = useState("");
     const [login, setLogin] = useState("");
     const [password, setPassword] = useState("");
@@ -9,9 +9,33 @@ const AddDeviceForm = ({ onCancel }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const deviceData = { ip, login, password, deviceType };
-        console.log("Device added:", deviceData);
-        // Здесь можно отправить данные на сервер
+
+        // Создаем объект нового устройства
+        const newDevice = {
+            name: deviceType === "antminer" ? "Antminer" : "Wotsminer",
+            ip,
+            login,
+            password,
+            pool: "stratum+tcp://example.pool.com:3333", // Дефолтное значение, если нужно
+            fans: [0, 0, 0, 0], // Дефолтные значения, можно заменить при получении данных
+            boards: [
+                { temp: 0, color: "#28a745" },
+                { temp: 0, color: "#ffc107" },
+                { temp: 0, color: "#dc3545" }
+            ],
+            hashrate: "0" // Дефолтное значение
+        };
+
+        // Передаём устройство в Dashboard через onAddDevice
+        onAddDevice(newDevice);
+
+        // Сбрасываем форму
+        setIp("");
+        setLogin("");
+        setPassword("");
+        setDeviceType("antminer");
+
+        // Закрываем модальное окно
         onCancel();
     };
 

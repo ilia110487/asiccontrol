@@ -3,12 +3,14 @@
     flex-direction: column;
     gap: 15px;
     padding: 20px;
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(5px);
+    background: rgba(0, 0, 0, 0.7); /* Увеличена прозрачность */
+    backdrop-filter: blur(10px); /* Более заметное размытие фона */
     border-radius: 10px;
     width: 100%;
     max-width: 400px;
     color: white;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* Добавлена лёгкая тень */
+    animation: fadeIn 0.5s ease-in-out; /* Анимация появления */
 }
 
 .add-device-form label {
@@ -16,51 +18,77 @@
     flex-direction: column;
     font-size: 1rem;
     gap: 5px;
+    color: #cccccc; /* Серый цвет для текста */
 }
 
 .add-device-form input,
 .add-device-form select {
     padding: 10px;
     font-size: 1rem;
-    border: none;
+    border: 1px solid #444444; /* Добавлен контур */
     border-radius: 5px;
-    background: #2e2e2e;
+    background: #1e1e1e; /* Более тёмный фон */
     color: white;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.add-device-form input:focus,
+.add-device-form select:focus {
+    border-color: #00ffc3; /* Цвет акцента при фокусе */
+    box-shadow: 0 0 8px rgba(0, 255, 195, 0.8); /* Эффект свечения */
+    outline: none;
 }
 
 .add-device-form input::placeholder {
-    color: #bbbbbb;
+    color: #aaaaaa;
 }
 
 .add-device-form .form-buttons {
     display: flex;
     justify-content: space-between;
+    gap: 10px; /* Пробел между кнопками */
 }
 
 .add-device-form .add-btn {
     padding: 10px 20px;
-    background: #00ffc3;
+    background: linear-gradient(135deg, #00ffc3, #00cca3); /* Градиентная кнопка */
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    transition: background 0.3s ease-in-out;
+    transition: background 0.3s ease-in-out, transform 0.2s ease;
     color: #121212;
+    font-weight: bold;
 }
 
 .add-device-form .add-btn:hover {
-    background: #00cca3;
+    background: linear-gradient(135deg, #00cca3, #00ffc3); /* Обратный градиент */
+    transform: scale(1.05); /* Лёгкое увеличение при наведении */
 }
 
 .add-device-form .cancel-btn {
     padding: 10px 20px;
-    background: #ff4d4d;
+    background: linear-gradient(135deg, #ff4d4d, #d43d3d); /* Градиентная кнопка */
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    transition: background 0.3s ease-in-out;
+    transition: background 0.3s ease-in-out, transform 0.2s ease;
     color: white;
+    font-weight: bold;
 }
 
 .add-device-form .cancel-btn:hover {
-    background: #d43d3d;
+    background: linear-gradient(135deg, #d43d3d, #ff4d4d); /* Обратный градиент */
+    transform: scale(1.05); /* Лёгкое увеличение при наведении */
+}
+
+/* Анимация появления */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
