@@ -17,10 +17,8 @@ const AntminerCard = ({ device }) => {
     const [minerData, setMinerData] = useState(null);
     const [hashrateHistory, setHashrateHistory] = useState(null);
 
-    // Интервал обновления данных (в миллисекундах)
     const updateInterval = 30000; // Обновление каждые 30 секунд
 
-    // Функция для получения данных устройства
     const fetchMinerData = async () => {
         try {
             const response = await fetch(`http://127.0.0.1:8000/api/devices/${device.id}/fetch_data/`);
@@ -42,27 +40,25 @@ const AntminerCard = ({ device }) => {
         }
     };
 
-    // Функция для получения истории хэшрейта
     const fetchHashrateHistory = async () => {
         try {
             const response = await fetch(`http://127.0.0.1:8000/api/devices/${device.id}/hashrate_history/`);
             const data = await response.json();
 
-            // Форматирование данных для графика
-            const labels = data.map((record) =>
-                new Date(record.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
-            );
-            const values = data.map((record) => Math.max(record.hashrate, 0)); // Исключаем отрицательные значения
+            const labels = Array.from({ length: data.length }, () => "");
+            const values = data.map((record) => Math.max(record.hashrate / 1000, 0)); // Перевод в TH/s
 
             setHashrateHistory({
                 labels,
                 datasets: [
                     {
-                        label: "Hashrate (GH/s)",
+                        label: "",
                         data: values,
                         borderColor: "orange",
-                        backgroundColor: "rgba(255, 165, 0, 0.2)",
+                        backgroundColor: "rgba(255, 165, 0, 0.1)",
                         tension: 0.4,
+                        borderWidth: 1,
+                        pointRadius: 1.5,
                     },
                 ],
             });
@@ -71,21 +67,15 @@ const AntminerCard = ({ device }) => {
         }
     };
 
-    // Эффект для первичной загрузки данных и установки интервала обновления
     useEffect(() => {
-        // Функция для обновления данных
         const updateData = () => {
             fetchMinerData();
-            fetchHashrateHistory(); // Обновляем и историю хэшрейта
+            fetchHashrateHistory();
         };
 
-        // Загрузка данных при первом рендере
         updateData();
-
-        // Установка интервала
         const intervalId = setInterval(updateData, updateInterval);
 
-        // Очистка интервала при размонтировании компонента
         return () => clearInterval(intervalId);
     }, [device]);
 
@@ -93,7 +83,6 @@ const AntminerCard = ({ device }) => {
         return <div className="antminer-card">Загрузка данных...</div>;
     }
 
-    // Вычисление самой высокой температуры для каждой платы
     const chainMaxTemps = minerData.chains.map((chain) => {
         const maxTemp = Math.max(...chain.temp_chip);
         return { chainIndex: chain.index, maxTemp };
@@ -125,22 +114,24 @@ const AntminerCard = ({ device }) => {
                     </div>
                 </div>
                 {/* Вентиляторы */}
-                <div className="fan-section">
+                <div className="fan-grid">
                     {minerData.fans.map((fanSpeed, index) => (
                         <div key={index} className="fan-item">
-                            <div className="fan-info">{fanSpeed} RPM</div>
-                            <div
-                                className="fan-bar"
-                                style={{
-                                    width: `${(fanSpeed / 7000) * 100}%`,
-                                    backgroundColor:
+                            <div className="fan-info">
+                                <span>
+                                    <strong>FAN {index + 1}</strong> {fanSpeed} RPM
+                                </span>
+                                <div
+                                    className={`fan-bar ${
                                         fanSpeed < 2000
                                             ? "green"
                                             : fanSpeed < 5000
                                             ? "orange"
-                                            : "red",
-                                }}
-                            ></div>
+                                            : "red"
+                                    }`}
+                                    style={{ width: `${(fanSpeed / 7000) * 100}%` }}
+                                ></div>
+                            </div>
                         </div>
                     ))}
                 </div>
@@ -152,8 +143,11 @@ const AntminerCard = ({ device }) => {
                             responsive: true,
                             plugins: { legend: { display: false } },
                             scales: {
-                                x: {
-                                    ticks: { display: true }, // Метки на оси X
+                                x: { ticks: { display: false } },
+                                y: {
+                                    ticks: {
+                                        callback: (value) => `${value.toFixed(1)} TH/s`,
+                                    },
                                 },
                             },
                         }}
