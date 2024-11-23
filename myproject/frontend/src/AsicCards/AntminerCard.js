@@ -1,24 +1,20 @@
 import React, { useState, useEffect } from "react";
-import { Line } from "react-chartjs-2";
 import {
-    Chart as ChartJS,
-    LineElement,
-    CategoryScale,
-    LinearScale,
-    PointElement,
+    AreaChart,
+    Area,
+    ResponsiveContainer,
+    CartesianGrid,
     Tooltip,
-    Legend,
-} from "chart.js";
+    XAxis,
+    YAxis,
+} from "recharts";
 import "./AntminerCard.css";
-
-ChartJS.register(LineElement, CategoryScale, LinearScale, PointElement, Tooltip, Legend);
 
 const AntminerCard = ({ device }) => {
     const [minerData, setMinerData] = useState(null);
-    const [hashrateHistory, setHashrateHistory] = useState(null);
-
+    const [hashrateHistory, setHashrateHistory] = useState([]);
     const updateInterval = 30000; // Обновление каждые 30 секунд
-    const [initialHashrate, setInitialHashrate] = useState(null); // Для отслеживания падения хэшрейта
+    const [initialHashrate, setInitialHashrate] = useState(null);
 
     const fetchMinerData = async () => {
         try {
@@ -35,7 +31,7 @@ const AntminerCard = ({ device }) => {
                 });
 
                 if (initialHashrate === null) {
-                    setInitialHashrate(stats.rate_5s); // Сохраняем стартовый хэшрейт
+                    setInitialHashrate(stats.rate_5s);
                 }
             } else {
                 console.error("STATS отсутствует в данных устройства.");
@@ -50,23 +46,11 @@ const AntminerCard = ({ device }) => {
             const response = await fetch(`http://127.0.0.1:8000/api/devices/${device.id}/hashrate_history/`);
             const data = await response.json();
 
-            const labels = Array.from({ length: data.length }, () => "");
-            const values = data.map((record) => Math.max(record.hashrate / 1000, 0)); // Перевод в TH/s
+            const formattedData = data.map((record) => ({
+                hashrate: Math.max(record.hashrate / 1000, 0), // Преобразуем в TH/s
+            }));
 
-            setHashrateHistory({
-                labels,
-                datasets: [
-                    {
-                        label: "",
-                        data: values,
-                        borderColor: "orange",
-                        backgroundColor: "rgba(255, 165, 0, 0.1)",
-                        tension: 0.4,
-                        borderWidth: 1,
-                        pointRadius: 1.5,
-                    },
-                ],
-            });
+            setHashrateHistory(formattedData);
         } catch (err) {
             console.error("Ошибка загрузки истории хэшрейта:", err);
         }
@@ -84,7 +68,7 @@ const AntminerCard = ({ device }) => {
         return () => clearInterval(intervalId);
     }, [device]);
 
-    if (!minerData || !hashrateHistory) {
+    if (!minerData || !hashrateHistory.length) {
         return <div className="antminer-card">Загрузка данных...</div>;
     }
 
@@ -93,7 +77,6 @@ const AntminerCard = ({ device }) => {
         return { chainIndex: chain.index, maxTemp };
     });
 
-    // Проверяем состояние устройства
     const isConnectionLost = !minerData.hashrate_5s || minerData.hashrate_5s === 0;
     const isHashrateDropped =
         initialHashrate &&
@@ -121,60 +104,112 @@ const AntminerCard = ({ device }) => {
                     </div>
                 </div>
                 <div className="hashrate-display">
-                    {minerData.hashrate_5s?.toFixed(2) || "N/A"} GH/s
+                    {minerData.hashrate_5s?.toFixed(2) || "N/A"} TH/s
                 </div>
             </header>
             <div className="card-body">
-                {/* Температуры плат */}
+                {/* Платы и вентиляторы */}
                 <div className="metrics-row">
+                    {/* Платы */}
                     <div className="board-temps">
-                        {chainMaxTemps.map((chain, index) => (
-                            <div key={index} className="board-temp">
-                                <span>Плата {chain.chainIndex}: </span>
-                                <span>{chain.maxTemp || "N/A"}°C</span>
-                            </div>
-                        ))}
+                        <span style={{ fontSize: "0.8rem", marginBottom: "5px" }}>Платы</span>
+                        <div style={{ display: "flex", gap: "10px" }}>
+                            {chainMaxTemps.map((chain, index) => {
+                                const tempColor =
+                                    chain.maxTemp < 50
+                                        ? "green"
+                                        : chain.maxTemp < 70
+                                        ? "orange"
+                                        : "red";
+                                return (
+                                    <div
+                                        key={index}
+                                        className="board-temp"
+                                        style={{
+                                            backgroundColor: tempColor,
+                                            color: "white",
+                                            borderRadius: "50%",
+                                            width: "35px",
+                                            height: "35px",
+                                            display: "flex",
+                                            justifyContent: "center",
+                                            alignItems: "center",
+                                            fontSize: "0.9rem",
+                                        }}
+                                    >
+                                        {chain.maxTemp}°C
+                                    </div>
+                                );
+                            })}
+                        </div>
+                    </div>
+
+                    {/* Вентиляторы */}
+                    <div className="fan-grid">
+                        <span style={{ fontSize: "0.8rem", marginBottom: "5px" }}>
+                            (Вентиляторы / RPM)
+                        </span>
+                        <div style={{ display: "flex", gap: "10px", flexWrap: "wrap" }}>
+                            {minerData.fans.map((fanSpeed, index) => (
+                                <div
+                                    key={index}
+                                    className="fan-item"
+                                    style={{
+                                        display: "flex",
+                                        flexDirection: "column",
+                                        alignItems: "center",
+                                    }}
+                                >
+                                    <span
+                                        style={{
+                                            fontSize: "0.9rem",
+                                            fontWeight: "bold",
+                                        }}
+                                    >
+                                        {fanSpeed}
+                                    </span>
+                                    <div
+                                        className="fan-bar"
+                                        style={{
+                                            width: "50px",
+                                            height: "5px",
+                                            backgroundColor:
+                                                fanSpeed < 2000
+                                                    ? "green"
+                                                    : fanSpeed < 5000
+                                                    ? "orange"
+                                                    : "red",
+                                            marginTop: "5px",
+                                        }}
+                                    ></div>
+                                </div>
+                            ))}
+                        </div>
                     </div>
                 </div>
-                {/* Вентиляторы */}
-                <div className="fan-grid">
-                    {minerData.fans.map((fanSpeed, index) => (
-                        <div key={index} className="fan-item">
-                            <div className="fan-info">
-                                <span>
-                                    <strong>FAN {index + 1}</strong> {fanSpeed} RPM
-                                </span>
-                                <div
-                                    className={`fan-bar ${
-                                        fanSpeed < 2000
-                                            ? "green"
-                                            : fanSpeed < 5000
-                                            ? "orange"
-                                            : "red"
-                                    }`}
-                                    style={{ width: `${(fanSpeed / 7000) * 100}%` }}
-                                ></div>
-                            </div>
-                        </div>
-                    ))}
-                </div>
-                {/* График хэшрейта */}
+
+                {/* График */}
                 <div className="hashrate-section">
-                    <Line
-                        data={hashrateHistory}
-                        options={{
-                            responsive: true,
-                            plugins: { legend: { display: false } },
-                            scales: {
-                                x: { ticks: { display: false } },
-                                y: {
-                                    ticks: {
-                                        callback: (value) => `${value.toFixed(1)} TH/s`,
-                                    },
-                                },
-                            },
-                        }}
-                    />
+                    <ResponsiveContainer width="100%" height={75}>
+                        <AreaChart data={hashrateHistory}>
+                            <defs>
+                                <linearGradient id="colorHashrate" x1="0" y1="0" x2="0" y2="1">
+                                    <stop offset="0%" stopColor="orange" stopOpacity={0.8} />
+                                    <stop offset="100%" stopColor="orange" stopOpacity={0} />
+                                </linearGradient>
+                            </defs>
+                            <XAxis hide={true} />
+                            <YAxis hide={true} />
+                            <Tooltip />
+                            <Area
+                                type="monotone"
+                                dataKey="hashrate"
+                                stroke="orange"
+                                fill="url(#colorHashrate)"
+                                strokeWidth={2}
+                            />
+                        </AreaChart>
+                    </ResponsiveContainer>
                 </div>
             </div>
         </div>
