@@ -34,11 +34,16 @@ const Dashboard = ({ onLogout }) => {
     // Добавление нового устройства
     const addDevice = async (newDevice) => {
         try {
+            const csrftoken = document.cookie
+            .split('; ')
+            .find((row) => row.startsWith('csrftoken='))
+            ?.split('=')[1];
             // Отправляем новое устройство на сервер
             const response = await fetch("http://127.0.0.1:8000/api/devices/", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
+                    "X-CSRFToken": csrftoken, // Передача CSRF-токен
                 },
                 body: JSON.stringify(newDevice),
             });

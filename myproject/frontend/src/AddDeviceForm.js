@@ -10,20 +10,12 @@ const AddDeviceForm = ({ onCancel, onAddDevice }) => {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        // Создаем объект нового устройства
+        // Создаем объект нового устройства, отправляем только нужные данные
         const newDevice = {
-            name: deviceType === "antminer" ? "Antminer" : "Wotsminer",
             ip,
             login,
             password,
-            pool: "stratum+tcp://example.pool.com:3333", // Дефолтное значение, если нужно
-            fans: [0, 0, 0, 0], // Дефолтные значения, можно заменить при получении данных
-            boards: [
-                { temp: 0, color: "#28a745" },
-                { temp: 0, color: "#ffc107" },
-                { temp: 0, color: "#dc3545" }
-            ],
-            hashrate: "0" // Дефолтное значение
+            type: deviceType === "antminer" ? "antminer" : "whatsminer", // Приводим к нужному формату
         };
 
         // Передаём устройство в Dashboard через onAddDevice
@@ -78,7 +70,7 @@ const AddDeviceForm = ({ onCancel, onAddDevice }) => {
                     onChange={(e) => setDeviceType(e.target.value)}
                 >
                     <option value="antminer">Antminer</option>
-                    <option value="wotsminer">Wotsminer</option>
+                    <option value="whatsminer">Whatsminer</option>
                 </select>
             </label>
             <div className="form-buttons">

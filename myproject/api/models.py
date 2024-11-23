@@ -5,7 +5,7 @@ from django.contrib.auth.models import User  # Для связи с пользо
 class AsicDevice(models.Model):
     TYPE_CHOICES = [
         ('antminer', 'Antminer'),
-        ('wotsminer', 'Wotsminer'),
+        ('whatsminer', 'Whatsminer'),
         # Добавьте другие типы устройств, если необходимо
     ]
 

@@ -1,0 +1,10 @@
+.whatsminer-card {
+    background-color: #2e2e2e;
+    color: #ffffff;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+.whatsminer-card h3 {
+    margin: 0 0 10px;
+}
