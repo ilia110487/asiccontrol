@@ -17,64 +17,76 @@ const AntminerCard = ({ device }) => {
     const [minerData, setMinerData] = useState(null);
     const [hashrateHistory, setHashrateHistory] = useState(null);
 
-    // Получение данных устройства
-    useEffect(() => {
-        const fetchMinerData = async () => {
-            try {
-                const response = await fetch(`http://127.0.0.1:8000/api/devices/${device.id}/fetch_data/`);
-                const data = await response.json();
+    // Интервал обновления данных (в миллисекундах)
+    const updateInterval = 30000; // Обновление каждые 30 секунд
 
-                if (data.STATS && data.STATS.length > 0) {
-                    const stats = data.STATS[0];
-                    setMinerData({
-                        type: data.INFO.type,
-                        hashrate_5s: stats.rate_5s,
-                        fans: stats.fan || [],
-                        chains: stats.chain || [],
-                    });
-                } else {
-                    console.error("STATS отсутствует в данных устройства.");
-                }
-            } catch (err) {
-                console.error("Ошибка загрузки данных устройства:", err);
+    // Функция для получения данных устройства
+    const fetchMinerData = async () => {
+        try {
+            const response = await fetch(`http://127.0.0.1:8000/api/devices/${device.id}/fetch_data/`);
+            const data = await response.json();
+
+            if (data.STATS && data.STATS.length > 0) {
+                const stats = data.STATS[0];
+                setMinerData({
+                    type: data.INFO.type,
+                    hashrate_5s: stats.rate_5s,
+                    fans: stats.fan || [],
+                    chains: stats.chain || [],
+                });
+            } else {
+                console.error("STATS отсутствует в данных устройства.");
             }
+        } catch (err) {
+            console.error("Ошибка загрузки данных устройства:", err);
+        }
+    };
+
+    // Функция для получения истории хэшрейта
+    const fetchHashrateHistory = async () => {
+        try {
+            const response = await fetch(`http://127.0.0.1:8000/api/devices/${device.id}/hashrate_history/`);
+            const data = await response.json();
+
+            // Форматирование данных для графика
+            const labels = data.map((record) =>
+                new Date(record.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+            );
+            const values = data.map((record) => Math.max(record.hashrate, 0)); // Исключаем отрицательные значения
+
+            setHashrateHistory({
+                labels,
+                datasets: [
+                    {
+                        label: "Hashrate (GH/s)",
+                        data: values,
+                        borderColor: "orange",
+                        backgroundColor: "rgba(255, 165, 0, 0.2)",
+                        tension: 0.4,
+                    },
+                ],
+            });
+        } catch (err) {
+            console.error("Ошибка загрузки истории хэшрейта:", err);
+        }
+    };
+
+    // Эффект для первичной загрузки данных и установки интервала обновления
+    useEffect(() => {
+        // Функция для обновления данных
+        const updateData = () => {
+            fetchMinerData();
+            fetchHashrateHistory(); // Обновляем и историю хэшрейта
         };
 
-        fetchMinerData();
-    }, [device]);
+        // Загрузка данных при первом рендере
+        updateData();
 
-    // Получение истории хэшрейта
-    useEffect(() => {
-        const fetchHashrateHistory = async () => {
-            try {
-                const response = await fetch(`http://127.0.0.1:8000/api/devices/${device.id}/hashrate_history/`);
-                const data = await response.json();
+        // Установка интервала
+        const intervalId = setInterval(updateData, updateInterval);
 
-                // Форматирование данных для графика
-                const labels = Array.from({ length: 24 }, (_, i) => `Час ${i + 1}`);
-                const values = labels.map((label, i) => {
-                    const record = data.find((_, index) => index === i);
-                    return record ? Math.max(record.hashrate, 0) : 0; // Исключаем отрицательные значения
-                });
-
-                setHashrateHistory({
-                    labels,
-                    datasets: [
-                        {
-                            label: "Hashrate (GH/s)",
-                            data: values,
-                            borderColor: "orange",
-                            backgroundColor: "rgba(255, 165, 0, 0.2)",
-                            tension: 0.4,
-                        },
-                    ],
-                });
-            } catch (err) {
-                console.error("Ошибка загрузки истории хэшрейта:", err);
-            }
-        };
-
-        fetchHashrateHistory();
+        // Очистка интервала при размонтировании компонента
+        return () => clearInterval(intervalId);
     }, [device]);
 
     if (!minerData || !hashrateHistory) {
@@ -141,7 +153,7 @@ const AntminerCard = ({ device }) => {
                             plugins: { legend: { display: false } },
                             scales: {
                                 x: {
-                                    ticks: { display: false }, // Убираем метки на оси X
+                                    ticks: { display: true }, // Метки на оси X
                                 },
                             },
                         }}

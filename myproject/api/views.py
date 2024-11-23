@@ -17,24 +17,27 @@ class AsicDeviceViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         """
-        Возвращает только устройства, принадлежащие текущему пользователю.
+        Возвращает устройства, принадлежащие текущему пользователю.
         """
         return AsicDevice.objects.filter(user=self.request.user)
 
     def perform_create(self, serializer):
         """
-        При создании устройства автоматически связывает его с текущим пользователем.
+        Связывает создаваемое устройство с текущим пользователем.
         """
         serializer.save(user=self.request.user)
 
     @action(detail=True, methods=['get'], permission_classes=[permissions.IsAuthenticated])
     def fetch_data(self, request, pk=None):
         """
-        Получает данные с ASIC-устройства, сохраняет их в базе и возвращает.
+        Получает данные с устройства, сохраняет их в базе и возвращает.
         """
         try:
-            # Получаем устройство по ID
+            # Получаем устройство
             device = self.get_object()
+
+            # Логируем параметры устройства
+            print(f"Получение данных с устройства {device.ip} для пользователя {device.user}")
 
             # Получаем данные с устройства
             miner_data = fetch_miner_data(
@@ -43,58 +46,72 @@ class AsicDeviceViewSet(viewsets.ModelViewSet):
                 password=device.password
             )
 
-            # Проверяем наличие ошибок
+            # Логируем полученные данные
+            print(f"Данные, полученные с устройства {device.ip}: {miner_data}")
+
             if "error" in miner_data:
+                print(f"Ошибка при получении данных: {miner_data['error']}")
                 return Response({"error": miner_data["error"]}, status=400)
 
-            # Сохраняем метрики устройства
+            # Сохранение метрик устройства
             AsicMetric.objects.create(device=device, data=miner_data)
 
-            # Сохраняем хэшрейт
-            hashrate_avg = miner_data.get("hashrate_avg", 0.0)
+            # Извлечение и преобразование среднего хэшрейта
+            stats = miner_data.get("STATS", [])
+            if stats and isinstance(stats, list):
+                hashrate_avg = stats[0].get("rate_avg", 0.0)
+            else:
+                hashrate_avg = 0.0
+
             try:
                 hashrate_avg = float(hashrate_avg)
-            except ValueError:
-                hashrate_avg = 0.0  # Если значение некорректное, сохраняем как 0.0
+            except (ValueError, TypeError):
+                print(f"Некорректное значение хэшрейта: {hashrate_avg}. Сохранение как 0.0")
+                hashrate_avg = 0.0
 
+            # Сохранение хэшрейта
+            print(f"Сохраняем хэшрейт {hashrate_avg} для устройства {device}")
             AsicHashrate.objects.create(device=device, hashrate=hashrate_avg)
 
-            # Удаляем устаревшие записи хэшрейта (старше 24 часов)
-            AsicHashrate.objects.filter(
+            # Удаление устаревших данных
+            deleted_count, _ = AsicHashrate.objects.filter(
                 device=device,
                 timestamp__lt=now() - timedelta(hours=24)
             ).delete()
+            print(f"Удалено {deleted_count} устаревших записей хэшрейта")
 
-            # Возвращаем свежие данные
             return Response(miner_data, status=200)
 
         except Exception as e:
+            print(f"Ошибка при обработке устройства {device.ip}: {str(e)}")
             return Response({"error": f"Ошибка при получении данных: {str(e)}"}, status=500)
 
     @action(detail=True, methods=['get'], permission_classes=[permissions.IsAuthenticated])
     def hashrate_history(self, request, pk=None):
         """
-        Возвращает историю хэшрейта устройства за последние 24 часа.
+        Возвращает историю хэшрейта за последние 24 часа.
         """
         try:
-            # Получаем устройство
             device = self.get_object()
 
-            # Выбираем хэшрейт за последние 24 часа
+            # Получение данных хэшрейта за последние 24 часа
             history = AsicHashrate.objects.filter(
                 device=device,
                 timestamp__gte=now() - timedelta(hours=24)
             ).order_by('timestamp')
 
-            # Формируем данные для ответа
+            if not history.exists():
+                print(f"Нет данных хэшрейта за последние 24 часа для устройства {device}")
+                return Response([], status=200)
+
             data = [
                 {"timestamp": record.timestamp, "hashrate": record.hashrate}
                 for record in history
             ]
-
             return Response(data, status=200)
 
         except Exception as e:
+            print(f"Ошибка при получении истории хэшрейта: {str(e)}")
             return Response({"error": f"Ошибка при получении истории хэшрейта: {str(e)}"}, status=500)
 
 
