@@ -18,6 +18,7 @@ const AntminerCard = ({ device }) => {
     const [hashrateHistory, setHashrateHistory] = useState(null);
 
     const updateInterval = 30000; // Обновление каждые 30 секунд
+    const [initialHashrate, setInitialHashrate] = useState(null); // Для отслеживания падения хэшрейта
 
     const fetchMinerData = async () => {
         try {
@@ -32,6 +33,10 @@ const AntminerCard = ({ device }) => {
                     fans: stats.fan || [],
                     chains: stats.chain || [],
                 });
+
+                if (initialHashrate === null) {
+                    setInitialHashrate(stats.rate_5s); // Сохраняем стартовый хэшрейт
+                }
             } else {
                 console.error("STATS отсутствует в данных устройства.");
             }
@@ -88,11 +93,29 @@ const AntminerCard = ({ device }) => {
         return { chainIndex: chain.index, maxTemp };
     });
 
+    // Проверяем состояние устройства
+    const isConnectionLost = !minerData.hashrate_5s || minerData.hashrate_5s === 0;
+    const isHashrateDropped =
+        initialHashrate &&
+        minerData.hashrate_5s < initialHashrate * 0.75;
+
+    const statusColor = isConnectionLost || isHashrateDropped ? "red" : "green";
+
     return (
         <div className="antminer-card">
             <header className="card-header">
                 <div className="card-title">
-                    <h2>{minerData.type}</h2>
+                    <div style={{ display: "flex", alignItems: "center", gap: "5px" }}>
+                        <div
+                            style={{
+                                width: "10px",
+                                height: "10px",
+                                backgroundColor: statusColor,
+                                borderRadius: "50%",
+                            }}
+                        ></div>
+                        <h3 style={{ margin: 0, fontSize: "1.2rem" }}>{minerData.type}</h3>
+                    </div>
                     <div className="card-info">
                         <span className="device-ip">{device.ip}</span>
                     </div>
