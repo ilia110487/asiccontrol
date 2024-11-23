@@ -1,60 +1,128 @@
 .antminer-card {
-    background: #2e2e2e;
+    background: linear-gradient(145deg, #3a3a3a, #2e2e2e);
     border-radius: 10px;
-    padding: 20px;
+    padding: 10px;
     color: white;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
     margin-bottom: 20px;
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
 .card-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 20px;
+    border-bottom: 1px solid #444;
+    padding-bottom: 5px;
+    margin-bottom: 10px;
 }
 
-.device-ip,
-.device-pool {
-    font-size: 0.9rem;
+.card-title {
+    display: flex;
+    flex-direction: column;
+}
+
+.card-info {
+    font-size: 0.8rem;
     color: #bbbbbb;
+}
+
+.hashrate-display {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: orange;
+    text-align: right;
 }
 
 .card-body {
     display: flex;
-    gap: 20px;
-}
-
-.fan-section,
-.board-section {
-    flex: 1;
-}
-
-.fan {
-    display: flex;
     flex-direction: column;
-    gap: 5px;
-    margin-bottom: 10px;
+    gap: 10px;
 }
 
-.fan-bar {
-    height: 10px;
-    border-radius: 5px;
-    transition: width 0.3s ease;
+.metrics-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
 }
 
-.board {
-    width: 50px;
-    height: 50px;
+.board-temps {
+    flex: 1;
     display: flex;
     justify-content: center;
     align-items: center;
-    color: white;
-    font-weight: bold;
-    border-radius: 5px;
-    margin: 5px;
 }
 
-.hashrate-graph {
-    margin-top: 20px;
+.board-temps-indicators {
+    display: flex;
+    gap: 5px;
+}
+
+.board-temp {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    font-size: 0.7rem;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+}
+
+.board-temp.green {
+    background-color: green;
+}
+
+.board-temp.orange {
+    background-color: orange;
+}
+
+.board-temp.red {
+    background-color: red;
+}
+
+.fan-section {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.fan-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.fan-item {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    align-items: flex-start;
+}
+
+.fan-info {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+}
+
+.fan-rpm {
+    font-size: 0.9rem;
+}
+
+.fan-icon {
+    font-size: 1.2rem;
+    color: #bbbbbb;
+}
+
+.fan-bar {
+    height: 5px;
+    border-radius: 3px;
+    width: 100%;
 }

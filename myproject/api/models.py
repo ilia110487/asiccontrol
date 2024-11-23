@@ -15,6 +15,7 @@ class AsicDevice(models.Model):
     password = models.CharField(max_length=50)  # Пароль для доступа к устройству
     type = models.CharField(max_length=20, choices=TYPE_CHOICES)  # Тип устройства (Antminer, Wotsminer)
     created_at = models.DateTimeField(auto_now_add=True)  # Время добавления устройства
+    fan_count = models.IntegerField(default=0)  # Добавлено поле fan_count
 
     def __str__(self):
         return f"{self.type} ({self.ip})"
@@ -27,3 +28,12 @@ class AsicMetric(models.Model):
 
     def __str__(self):
         return f"Metrics for {self.device.ip} at {self.timestamp}"
+
+# Модель для хранения истории хэшрейта
+class AsicHashrate(models.Model):
+    device = models.ForeignKey(AsicDevice, on_delete=models.CASCADE, related_name="hashrate_history")
+    timestamp = models.DateTimeField(auto_now_add=True)  # Время записи
+    hashrate = models.FloatField()  # Хэшрейт в GH/s
+
+    def __str__(self):
+        return f"{self.device.type} - {self.hashrate} GH/s @ {self.timestamp}"

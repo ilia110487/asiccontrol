@@ -5,7 +5,7 @@ from .models import AsicDevice, AsicMetric
 class AsicDeviceSerializer(serializers.ModelSerializer):
     class Meta:
         model = AsicDevice
-        fields = ['id', 'user', 'ip', 'login', 'password', 'type', 'board_count', 'fan_count', 'created_at']
+        fields = ['id', 'user', 'ip', 'login', 'password', 'type',  'fan_count', 'created_at']
         read_only_fields = ['id', 'user', 'created_at']
 
 # Сериализатор для ASIC-метрик

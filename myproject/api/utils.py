@@ -3,68 +3,58 @@ from requests.auth import HTTPDigestAuth
 
 def fetch_miner_data(url, username, password):
     """
-    Функция для получения данных с ASIC-майнера.
+    Функция для получения данных с ASIC-майнера с правильной авторизацией и заголовками.
     """
     try:
-        # Отправляем запрос к API
-        response = requests.get(url, auth=HTTPDigestAuth(username, password), timeout=10)
+        # Логируем начало запроса
+        print(f"Выполняем запрос к устройству: {url} с логином: {username}")
+
+        # Указываем заголовки
+        headers = {
+            "Accept": "application/json,text/javascript,*/*;q=0.01",
+            "Accept-Encoding": "gzip, deflate",
+            "Accept-Language": "en-US,en;q=0.9",
+            "User-Agent": "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Mobile Safari/537.36 Edg/131.0.0.0",
+            "X-Requested-With": "XMLHttpRequest",
+        }
+
+        # Проверяем и исправляем URL, если требуется
+        if not url.endswith("/cgi-bin/stats.cgi"):
+            if url.endswith("/"):
+                url = f"{url}cgi-bin/stats.cgi"
+            else:
+                url = f"{url}/cgi-bin/stats.cgi"
+
+        # Выполняем запрос
+        response = requests.get(url, auth=HTTPDigestAuth(username, password), headers=headers, timeout=10)
+
+        # Логируем статус ответа
+        print(f"Ответ получен с кодом: {response.status_code}")
 
         # Проверяем статус ответа
         if response.status_code != 200:
+            print(f"Ошибка: Статус страницы {response.status_code}")
             return {"error": f"Ошибка: Статус страницы {response.status_code}"}
 
-        # Парсим JSON-ответ
-        data = response.json()
+        # Логируем тело ответа
+        print(f"Тело ответа от устройства: {response.text}")
 
-        # Извлекаем информацию о статусе
-        miner_info = data.get("INFO", {})
-        miner_version = miner_info.get("miner_version", "N/A")
-        compile_time = miner_info.get("CompileTime", "N/A")
-        miner_type = miner_info.get("type", "N/A")
+        # Проверяем, что ответ содержит JSON
+        try:
+            data = response.json()
+        except ValueError:
+            print("Ошибка парсинга JSON. Ответ устройства некорректен.")
+            return {"error": "Устройство вернуло некорректный JSON"}
 
-        # Основные статистики
-        stats = data.get("STATS", [{}])[0]
-        elapsed_time = stats.get("elapsed", "N/A")
-        hashrate_5s = stats.get("rate_5s", "N/A")
-        hashrate_30m = stats.get("rate_30m", "N/A")
-        hashrate_avg = stats.get("rate_avg", "N/A")
-        fan_speeds = stats.get("fan", [])
+        print("Ответ успешно преобразован в JSON.")
+        return data
 
-        # Информация о вентиляторе
-        fans = {
-            f"fan{i+1}": fan_speeds[i] if i < len(fan_speeds) else "N/A"
-            for i in range(4)
-        }
-
-        # Информация о цепях
-        chains = stats.get("chain", [])
-        chain_data = [
-            {
-                "index": chain.get("index", "N/A"),
-                "freq_avg": chain.get("freq_avg", "N/A"),
-                "rate_ideal": chain.get("rate_ideal", "N/A"),
-                "rate_real": chain.get("rate_real", "N/A"),
-                "temp_pic": chain.get("temp_pic", []),
-                "temp_pcb": chain.get("temp_pcb", []),
-                "temp_chip": chain.get("temp_chip", []),
-                "hw": chain.get("hw", "N/A"),
-                "serial_number": chain.get("sn", "N/A"),
-            }
-            for chain in chains
-        ]
-
-        # Возвращаем данные
-        return {
-            "miner_version": miner_version,
-            "compile_time": compile_time,
-            "miner_type": miner_type,
-            "elapsed_time": elapsed_time,
-            "hashrate_5s": f"{hashrate_5s} GH/s",
-            "hashrate_30m": f"{hashrate_30m} GH/s",
-            "hashrate_avg": f"{hashrate_avg} GH/s",
-            "fan_speeds": fans,
-            "chains": chain_data,
-        }
-
+    except requests.Timeout:
+        print("Ошибка: Превышено время ожидания ответа от устройства.")
+        return {"error": "Превышено время ожидания ответа от устройства"}
+    except requests.ConnectionError:
+        print("Ошибка: Не удалось подключиться к устройству.")
+        return {"error": "Не удалось подключиться к устройству"}
     except requests.RequestException as e:
+        print(f"Ошибка подключения: {str(e)}")
         return {"error": f"Ошибка подключения: {str(e)}"}
