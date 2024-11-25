@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Modal from "./Modal";
 import AddDeviceForm from "./AddDeviceForm";
 import AntminerCard from "./AsicCards/AntminerCard";
+import WhatsMinerCard from "./AsicCards/WhatsMinerCard"; // Убедитесь, что этот компонент подключен
 import "./Dashboard.css";
 
 const Dashboard = ({ onLogout }) => {
@@ -18,6 +19,7 @@ const Dashboard = ({ onLogout }) => {
                     throw new Error(`Ошибка загрузки: ${response.status}`);
                 }
                 const data = await response.json();
+                console.log("[DEBUG] Устройства, загруженные из API:", data);
                 setDevices(data);
             } catch (err) {
                 console.error("Ошибка загрузки устройств:", err);
@@ -35,15 +37,15 @@ const Dashboard = ({ onLogout }) => {
     const addDevice = async (newDevice) => {
         try {
             const csrftoken = document.cookie
-            .split('; ')
-            .find((row) => row.startsWith('csrftoken='))
-            ?.split('=')[1];
-            // Отправляем новое устройство на сервер
+                .split("; ")
+                .find((row) => row.startsWith("csrftoken="))
+                ?.split("=")[1];
+
             const response = await fetch("http://127.0.0.1:8000/api/devices/", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
-                    "X-CSRFToken": csrftoken, // Передача CSRF-токен
+                    "X-CSRFToken": csrftoken, // Передача CSRF-токена
                 },
                 body: JSON.stringify(newDevice),
             });
@@ -52,9 +54,12 @@ const Dashboard = ({ onLogout }) => {
                 throw new Error(`Ошибка добавления устройства: ${response.status}`);
             }
 
-            // Получаем добавленное устройство с сервера
             const addedDevice = await response.json();
+            console.log("[DEBUG] Устройство добавлено:", addedDevice);
+
             setDevices([...devices, addedDevice]); // Обновляем список устройств
+            console.log("[DEBUG] Обновленный список устройств:", [...devices, addedDevice]);
+
             closeModal();
         } catch (err) {
             console.error("Ошибка добавления устройства:", err);
@@ -75,7 +80,15 @@ const Dashboard = ({ onLogout }) => {
 
             <div className="device-grid">
                 {devices.length > 0 ? (
-                    devices.map((device) => <AntminerCard key={device.id} device={device} />)
+                    devices.map((device) =>
+                        device.type === "antminer" ? (
+                            <AntminerCard key={device.id} device={device} />
+                        ) : device.type === "whatsminer" ? (
+                            <WhatsMinerCard key={device.id} device={device} />
+                        ) : (
+                            <div key={device.id}>Неизвестный тип устройства</div>
+                        )
+                    )
                 ) : (
                     !error && <p className="no-devices">Нет добавленных устройств.</p>
                 )}
