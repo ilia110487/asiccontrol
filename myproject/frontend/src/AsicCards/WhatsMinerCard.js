@@ -8,9 +8,10 @@ import {
     XAxis,
     YAxis,
 } from "recharts";
+import DeviceMenu from "./DeviceMenu"; // Подключаем меню для устройств
 import "./WhatsMinerCard.css";
 
-const WhatsMinerCard = ({ device }) => {
+const WhatsMinerCard = ({ device, onEditDevice, onDeleteDevice }) => {
     const [minerData, setMinerData] = useState(null);
     const [hashrateHistory, setHashrateHistory] = useState([]);
     const updateInterval = 30000; // Обновление каждые 30 секунд
@@ -44,18 +45,8 @@ const WhatsMinerCard = ({ device }) => {
                 power: summary["Power"] || "N/A",
             });
 
-            console.log(`[DEBUG] [FETCH_MINER_DATA] minerData успешно установлено:`, {
-                type: device.type,
-                hashrate: parseFloat(summary["MHS av"]) / 1000 || 0,
-                fanSpeedIn: summary["Fan Speed In"] || "N/A",
-                fanSpeedOut: summary["Fan Speed Out"] || "N/A",
-                temperature: summary["Temperature"] || "N/A",
-                power: summary["Power"] || "N/A",
-            });
-
             if (initialHashrate === null) {
                 setInitialHashrate(parseFloat(summary["MHS av"]) / 1000 || 0);
-                console.log(`[DEBUG] [FETCH_MINER_DATA] initialHashrate установлено:`, initialHashrate);
             }
         } catch (err) {
             console.error("[ERROR] [FETCH_MINER_DATA] Ошибка загрузки данных устройства:", err);
@@ -81,7 +72,6 @@ const WhatsMinerCard = ({ device }) => {
             }));
 
             setHashrateHistory(formattedData);
-            console.log(`[DEBUG] [FETCH_HASHRATE_HISTORY] История хэшрейта успешно установлена:`, formattedData);
         } catch (err) {
             console.error("[ERROR] [FETCH_HASHRATE_HISTORY] Ошибка загрузки истории хэшрейта:", err);
         }
@@ -89,7 +79,6 @@ const WhatsMinerCard = ({ device }) => {
 
     useEffect(() => {
         const updateData = () => {
-            console.log("[DEBUG] [USE_EFFECT] Обновление данных устройства...");
             fetchMinerData();
             fetchHashrateHistory();
         };
@@ -97,14 +86,10 @@ const WhatsMinerCard = ({ device }) => {
         updateData();
         const intervalId = setInterval(updateData, updateInterval);
 
-        return () => {
-            console.log("[DEBUG] [USE_EFFECT] Очистка интервала обновления.");
-            clearInterval(intervalId);
-        };
+        return () => clearInterval(intervalId);
     }, [device]);
 
     if (!minerData || !hashrateHistory.length) {
-        console.log("[DEBUG] [RENDER] Данные еще не загружены. minerData:", minerData, "hashrateHistory:", hashrateHistory);
         return <div className="whatsminer-card">Загрузка данных...</div>;
     }
 
@@ -137,6 +122,12 @@ const WhatsMinerCard = ({ device }) => {
                 <div className="hashrate-display">
                     {minerData.hashrate?.toFixed(2) || "N/A"} GH/s
                 </div>
+                {/* Подключаем меню для редактирования/удаления */}
+                <DeviceMenu
+                    device={device}
+                    onEditDevice={onEditDevice}
+                    onDeleteDevice={onDeleteDevice}
+                />
             </header>
             <div className="card-body">
                 <div className="metrics-row">

@@ -67,6 +67,43 @@ const Dashboard = ({ onLogout }) => {
         }
     };
 
+    // Удаление устройства
+    const deleteDevice = async (deviceId) => {
+        try {
+            const csrftoken = document.cookie
+                .split("; ")
+                .find((row) => row.startsWith("csrftoken="))
+                ?.split("=")[1];
+
+            const response = await fetch(`http://127.0.0.1:8000/api/devices/${deviceId}/`, {
+                method: "DELETE",
+                headers: {
+                    "X-CSRFToken": csrftoken, // Передача CSRF-токена
+                },
+            });
+
+            if (!response.ok) {
+                throw new Error(`Ошибка удаления устройства: ${response.status}`);
+            }
+
+            console.log("[DEBUG] Устройство удалено:", deviceId);
+            setDevices(devices.filter((device) => device.id !== deviceId)); // Убираем устройство из списка
+        } catch (err) {
+            console.error("Ошибка удаления устройства:", err);
+            setError("Не удалось удалить устройство. Попробуйте снова.");
+        }
+    };
+
+    // Редактирование устройства
+    const editDevice = (updatedDevice) => {
+        setDevices(
+            devices.map((device) =>
+                device.id === updatedDevice.id ? { ...device, ...updatedDevice } : device
+            )
+        );
+        console.log("[DEBUG] Устройство обновлено:", updatedDevice);
+    };
+
     return (
         <div className="dashboard">
             <header className="dashboard-header">
@@ -82,9 +119,19 @@ const Dashboard = ({ onLogout }) => {
                 {devices.length > 0 ? (
                     devices.map((device) =>
                         device.type === "antminer" ? (
-                            <AntminerCard key={device.id} device={device} />
+                            <AntminerCard
+                                key={device.id}
+                                device={device}
+                                onEditDevice={editDevice}
+                                onDeleteDevice={deleteDevice}
+                            />
                         ) : device.type === "whatsminer" ? (
-                            <WhatsMinerCard key={device.id} device={device} />
+                            <WhatsMinerCard
+                                key={device.id}
+                                device={device}
+                                onEditDevice={editDevice}
+                                onDeleteDevice={deleteDevice}
+                            />
                         ) : (
                             <div key={device.id}>Неизвестный тип устройства</div>
                         )

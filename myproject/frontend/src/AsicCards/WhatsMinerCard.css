@@ -1,5 +1,5 @@
-.antminer-card {
-    background: linear-gradient(145deg, #3a3a3a, #2e2e2e);
+.whatsminer-card {
+    background: linear-gradient(145deg, #3a3a3a, #2e2e2e); /* Такой же фон, как у Antminer */
     border-radius: 10px;
     padding: 10px;
     color: white;
@@ -49,86 +49,22 @@
     gap: 10px;
 }
 
-.board-temps {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-}
-
-.board-temp {
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    font-size: 0.8rem;
-    color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-weight: bold;
-    background-color: #444;
-}
-
-.board-temp.green {
-    background-color: green;
-}
-
-.board-temp.orange {
-    background-color: orange;
-}
-
-.board-temp.red {
-    background-color: red;
-}
-
-.fan-section {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.fan-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
-}
-
-.fan-item {
+.temperature-section,
+.fan-speed-section,
+.power-section {
     background-color: #2e2e2e;
     padding: 10px;
     border-radius: 8px;
     text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 5px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
-.fan-info {
+.temperature-section span,
+.fan-speed-section span,
+.power-section span {
     font-size: 0.9rem;
     font-weight: bold;
-    color: #ffffff;
-}
-
-.fan-bar {
-    height: 5px;
-    border-radius: 3px;
-    width: 80%;
-    background-color: #555;
-}
-
-.fan-bar.green {
-    background-color: green;
-}
-
-.fan-bar.orange {
-    background-color: orange;
-}
-
-.fan-bar.red {
-    background-color: red;
+    color: white;
 }
 
 .hashrate-section {

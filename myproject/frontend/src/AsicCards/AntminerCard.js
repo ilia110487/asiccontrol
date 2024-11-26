@@ -9,8 +9,9 @@ import {
     YAxis,
 } from "recharts";
 import "./AntminerCard.css";
+import DeviceMenu from "./DeviceMenu"; // Подключаем меню управления устройством
 
-const AntminerCard = ({ device }) => {
+const AntminerCard = ({ device, onEditDevice, onDeleteDevice }) => {
     const [minerData, setMinerData] = useState(null);
     const [hashrateHistory, setHashrateHistory] = useState([]);
     const updateInterval = 30000; // Обновление каждые 30 секунд
@@ -103,6 +104,10 @@ const AntminerCard = ({ device }) => {
                         <span className="device-ip">{device.ip}</span>
                     </div>
                 </div>
+                <DeviceMenu
+                    onEdit={() => onEditDevice(device)}
+                    onDelete={() => onDeleteDevice(device.id)}
+                />
                 <div className="hashrate-display">
                     {minerData.hashrate_5s?.toFixed(2) || "N/A"} TH/s
                 </div>
