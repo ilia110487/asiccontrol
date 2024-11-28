@@ -108,9 +108,6 @@ const Dashboard = ({ onLogout }) => {
         <div className="dashboard">
             <header className="dashboard-header">
                 <h1>AsicControl Dashboard</h1>
-                <button className="logout-btn" onClick={onLogout}>
-                    Logout
-                </button>
             </header>
 
             {error && <div className="error-message">{error}</div>} {/* Вывод ошибки */}
