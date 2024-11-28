@@ -1,66 +1,37 @@
-import socket
-import json
-
-
-def is_host_reachable(ip, port=4028):
-    """
-    Проверяет, доступен ли хост через указанный порт.
-    """
-    try:
-        with socket.create_connection((ip, port), timeout=5):
-            print(f"Хост {ip}:{port} доступен.")
-            return True
-    except (socket.timeout, socket.error) as e:
-        print(f"Хост {ip}:{port} недоступен. Ошибка: {e}")
-        return False
-
+from whatsminer import WhatsminerAccessToken, WhatsminerAPI
+import re
 
 def fetch_whatsminer_data(ip, command="summary", port=4028):
     """
-    Функция для подключения к Whatsminer через API и выполнения команды.
+    Получение данных от Whatsminer через библиотеку WhatsminerAPI.
 
     Args:
-        ip (str): IP-адрес устройства.
+        ip (str): IP-адрес или доменное имя устройства. Если в строке есть префикс http:// или https://, он будет удален.
         command (str): Команда для выполнения (например, "summary").
         port (int): Порт для подключения (по умолчанию 4028).
 
     Returns:
-        dict: Ответ устройства в формате JSON.
+        dict: Ответ устройства в формате JSON или ошибка.
     """
     try:
-        # Проверяем доступность хоста
-        if not is_host_reachable(ip, port):
-            return {"error": f"Хост {ip} недоступен или порт {port} закрыт."}
+        # Убираем http:// или https:// из строки IP/домена
+        sanitized_ip = re.sub(r'^https?://|http://', '', ip)
+        
+        # Логируем очищенный IP
+        print(f"[DEBUG] Очищенный IP/домен: {sanitized_ip}")
 
-        # Формируем команду
-        json_command = json.dumps({"cmd": command})
+        # Создаем токен доступа
+        token = WhatsminerAccessToken(ip_address=sanitized_ip, port=port)
 
-        # Подключаемся через сокет и отправляем команду
-        with socket.create_connection((ip, port), timeout=10) as sock:
-            print(f"Подключение к {ip}:{port} установлено.")
-            sock.sendall(json_command.encode('utf-8'))
+        # Выполняем команду
+        response = WhatsminerAPI.get_read_only_info(access_token=token, cmd=command)
 
-            # Читаем ответ от устройства
-            response = sock.recv(4096)
-            print(f"Получен ответ: {response.decode('utf-8')}")
+        # Логируем результат
+        print(f"[DEBUG] Ответ от устройства {sanitized_ip}: {response}")
 
-        # Парсим JSON-ответ
-        data = json.loads(response.decode('utf-8'))
-        return data
-
-    except json.JSONDecodeError:
-        print("Ошибка: Невозможно разобрать JSON-ответ.")
-        return {"error": "Невозможно разобрать JSON-ответ."}
-
-    except socket.error as e:
-        print(f"Ошибка подключения через сокет: {e}")
-        return {"error": f"Ошибка подключения через сокет: {e}"}
-
-
-# Пример использования
-if __name__ == "__main__":
-    ip_address = "192.168.1.44"  # Укажите IP устройства
-    command = "summary"  # Команда для выполнения
-    response = fetch_whatsminer_data(ip=ip_address, command=command)
-    print("Результат выполнения:")
-    print(json.dumps(response, indent=4))
+        # Возвращаем результат
+        return response
+    except Exception as e:
+        # Логируем ошибки
+        print(f"[ERROR] Ошибка при подключении к {ip}: {e}")
+        return {"error": f"Ошибка при выполнении команды {command}: {str(e)}"}

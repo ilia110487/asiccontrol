@@ -1,5 +1,5 @@
 /* Контейнер всей формы */
-.login-container {
+.register-container {
     height: 100vh;
     display: flex;
     justify-content: center;
@@ -10,11 +10,11 @@
 }
 
 /* Сияющий эффект на фоне */
-.login-glow {
+.register-glow {
     position: absolute;
     width: 300px;
     height: 300px;
-    background: radial-gradient(circle, rgba(255, 184, 0, 0.3), rgba(255, 184, 0, 0));
+    background: radial-gradient(circle, rgba(66, 165, 245, 0.3), rgba(66, 165, 245, 0));
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -35,7 +35,7 @@
 }
 
 /* Панель формы */
-.login-panel {
+.register-panel {
     background: #1c1c1c;
     border-radius: 12px;
     padding: 40px;
@@ -45,8 +45,8 @@
 }
 
 /* Заголовок формы */
-.login-title {
-    color: #ffa726;
+.register-title {
+    color: #42a5f5;
     font-size: 2rem;
     text-align: center;
     margin-bottom: 20px;
@@ -54,7 +54,7 @@
 }
 
 /* Форма */
-.login-form {
+.register-form {
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -86,7 +86,7 @@ input {
     left: 0;
     height: 2px;
     width: 100%;
-    background: linear-gradient(to right, #ffa726, #ff5722);
+    background: linear-gradient(to right, #42a5f5, #1e88e5);
     border-radius: 4px;
     opacity: 0;
     transform: scaleX(0);
@@ -98,9 +98,9 @@ input:focus + .input-highlight {
     transform: scaleX(1);
 }
 
-/* Кнопка входа */
-.login-button {
-    background: linear-gradient(145deg, #ffa726, #ff5722);
+/* Кнопка регистрации */
+.register-button {
+    background: linear-gradient(145deg, #42a5f5, #1e88e5);
     color: #ffffff;
     padding: 12px 16px;
     font-size: 1.2rem;
@@ -108,15 +108,23 @@ input:focus + .input-highlight {
     border: none;
     border-radius: 8px;
     cursor: pointer;
-    box-shadow: 0 4px 15px rgba(255, 87, 34, 0.3);
+    box-shadow: 0 4px 15px rgba(66, 165, 245, 0.3);
     transition: all 0.3s ease;
 }
 
-.login-button:hover {
-    background: linear-gradient(145deg, #ff5722, #ffa726);
+.register-button:hover {
+    background: linear-gradient(145deg, #1e88e5, #42a5f5);
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(255, 87, 34, 0.5);
+    box-shadow: 0 6px 20px rgba(66, 165, 245, 0.5);
 }
+
+/* Сообщение об ошибке */
+.error-message {
+    color: #ff5722;
+    font-size: 0.9rem;
+    text-align: center;
+}
+/* Кнопка закрытия */
 .close-button {
     position: absolute;
     top: 10px;
@@ -126,9 +134,10 @@ input:focus + .input-highlight {
     color: #ffffff;
     font-size: 1.5rem;
     cursor: pointer;
+    z-index: 2;
     transition: color 0.3s ease;
 }
 
 .close-button:hover {
-    color: #f44336;
+    color: #ff5722;
 }

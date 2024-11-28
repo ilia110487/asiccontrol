@@ -10,7 +10,7 @@ class AsicDevice(models.Model):
     ]
 
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="devices")
-    ip = models.URLField(max_length=200)  # IP-адрес устройства
+    ip = models.CharField(max_length=200)  # IP-адрес устройства
     login = models.CharField(max_length=50)  # Логин для доступа к устройству
     password = models.CharField(max_length=50)  # Пароль для доступа к устройству
     type = models.CharField(max_length=20, choices=TYPE_CHOICES)  # Тип устройства (Antminer, Wotsminer)

@@ -38,7 +38,11 @@ class AsicDeviceViewSet(viewsets.ModelViewSet):
             # Получаем устройство
             device = self.get_object()
 
-            # Проверяем тип устройства
+            # Инициализация переменных
+            miner_data = {}
+            hashrate_avg = 0.0
+
+            # Проверяем тип устройства и вызываем соответствующую функцию
             if device.type == "antminer":
                 miner_data = fetch_miner_data(
                     url=device.ip,
@@ -46,38 +50,32 @@ class AsicDeviceViewSet(viewsets.ModelViewSet):
                     password=device.password
                 )
             elif device.type == "whatsminer":
-                try:
-                    # Работа через TCP
-                    miner_data = fetch_whatsminer_data(ip=device.ip, command="summary")
-                except Exception as e:
-                    return Response({"error": f"Ошибка при доступе к Whatsminer API через TCP: {str(e)}"}, status=500)
+                miner_data = fetch_whatsminer_data(ip=device.ip, command="summary")
             else:
                 return Response({"error": "Тип устройства не поддерживается."}, status=400)
 
             # Проверка на ошибки
             if "error" in miner_data:
-                print(f"Ошибка при получении данных: {miner_data['error']}")
                 return Response({"error": miner_data["error"]}, status=400)
 
-            # Сохранение метрик устройства
-            AsicMetric.objects.create(device=device, data=miner_data)
-
             # Извлечение и сохранение хэшрейта
-            hashrate_avg = 0.0
             if device.type == "antminer":
                 stats = miner_data.get("STATS", [])
                 if stats and isinstance(stats, list):
                     hashrate_avg = stats[0].get("rate_avg", 0.0)
             elif device.type == "whatsminer":
-                hashrate_avg = miner_data.get("GHSav", 0.0)
+                summary = miner_data.get("SUMMARY", [{}])[0]
+                hashrate_avg = summary.get("MHS av", 0.0) / 1000  # Преобразование MHS -> GHS
 
+            # Сохраняем метрики устройства
+            AsicMetric.objects.create(device=device, data=miner_data)
+
+            # Сохраняем хэшрейт
             try:
                 hashrate_avg = float(hashrate_avg)
             except (ValueError, TypeError):
                 print(f"Некорректное значение хэшрейта: {hashrate_avg}. Сохранение как 0.0")
                 hashrate_avg = 0.0
-
-            # Сохраняем хэшрейт
             AsicHashrate.objects.create(device=device, hashrate=hashrate_avg)
 
             # Удаление устаревших данных
@@ -134,7 +132,7 @@ class AsicDeviceViewSet(viewsets.ModelViewSet):
                 return Response([], status=200)
 
             data = [
-                {"timestamp": record.timestamp, "hashrate": record.hashrate}
+                {"timestamp": record.timestamp, "hashrate": round(record.hashrate, 2)}
                 for record in history
             ]
             return Response(data, status=200)
