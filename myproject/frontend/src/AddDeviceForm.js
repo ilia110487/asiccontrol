@@ -15,7 +15,7 @@ const AddDeviceForm = ({ onCancel, onAddDevice }) => {
             ip,
             login,
             password,
-            type: deviceType === "antminer" ? "antminer" : "whatsminer", // Приводим к нужному формату
+            type: deviceType, // Отправляем выбранный тип устройства
         };
 
         // Передаём устройство в Dashboard через onAddDevice
@@ -71,6 +71,7 @@ const AddDeviceForm = ({ onCancel, onAddDevice }) => {
                 >
                     <option value="antminer">Antminer</option>
                     <option value="whatsminer">Whatsminer</option>
+                    <option value="innosilicon">Innosilicon</option> {/* Добавляем новый тип */}
                 </select>
             </label>
             <div className="form-buttons">

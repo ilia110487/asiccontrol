@@ -7,6 +7,7 @@ from .models import AsicDevice, AsicMetric, AsicHashrate
 from .serializers import AsicDeviceSerializer, AsicMetricSerializer
 from .utils import fetch_miner_data  # Для Antminer
 from .fetch_whatsminer_data_tcp import fetch_whatsminer_data  # Для Whatsminer через TCP
+from .fetch_innosilicon_data import fetch_innosilicon_data  # Для Innosilicon
 from .custom_whatsminer_api import generate_whatsminer_token
 
 
@@ -42,30 +43,32 @@ class AsicDeviceViewSet(viewsets.ModelViewSet):
             miner_data = {}
             hashrate_avg = 0.0
 
-            # Проверяем тип устройства и вызываем соответствующую функцию
-            if device.type == "antminer":
-                miner_data = fetch_miner_data(
-                    url=device.ip,
-                    username=device.login,
-                    password=device.password
-                )
-            elif device.type == "whatsminer":
-                miner_data = fetch_whatsminer_data(ip=device.ip, command="summary")
-            else:
-                return Response({"error": "Тип устройства не поддерживается."}, status=400)
+            # Используем конструкцию match/case для обработки разных типов устройств
+            match device.type:
+                case "antminer":
+                    miner_data = fetch_miner_data(
+                        url=device.ip,
+                        username=device.login,
+                        password=device.password
+                    )
+                    stats = miner_data.get("STATS", [])
+                    if stats and isinstance(stats, list):
+                        hashrate_avg = stats[0].get("rate_avg", 0.0)
+                case "whatsminer":
+                    miner_data = fetch_whatsminer_data(ip=device.ip, command="summary")
+                    summary = miner_data.get("SUMMARY", [{}])[0]
+                    hashrate_avg = summary.get("MHS av", 0.0) / 1000  # Преобразование MHS -> GHS
+                case "innosilicon":
+                    miner_data = fetch_innosilicon_data(ip=device.ip, username=device.login, password=device.password)
+                    metrics = miner_data.get("metrics", {})
+                    hashrate_avg = metrics.get("hashrate", 0.0)  # Хэшрейт уже в TH/s
+
+                case _:
+                    return Response({"error": "Тип устройства не поддерживается."}, status=400)
 
             # Проверка на ошибки
             if "error" in miner_data:
                 return Response({"error": miner_data["error"]}, status=400)
-
-            # Извлечение и сохранение хэшрейта
-            if device.type == "antminer":
-                stats = miner_data.get("STATS", [])
-                if stats and isinstance(stats, list):
-                    hashrate_avg = stats[0].get("rate_avg", 0.0)
-            elif device.type == "whatsminer":
-                summary = miner_data.get("SUMMARY", [{}])[0]
-                hashrate_avg = summary.get("MHS av", 0.0) / 1000  # Преобразование MHS -> GHS
 
             # Сохраняем метрики устройства
             AsicMetric.objects.create(device=device, data=miner_data)

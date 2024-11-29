@@ -3,6 +3,8 @@ import Modal from "./Modal";
 import AddDeviceForm from "./AddDeviceForm";
 import AntminerCard from "./AsicCards/AntminerCard";
 import WhatsMinerCard from "./AsicCards/WhatsMinerCard"; // Убедитесь, что этот компонент подключен
+import InnosiliconCard from "./AsicCards/InnosiliconCard"; // Убедитесь, что путь правильный
+
 import "./Dashboard.css";
 
 const Dashboard = ({ onLogout }) => {
@@ -122,8 +124,16 @@ const Dashboard = ({ onLogout }) => {
                                 onEditDevice={editDevice}
                                 onDeleteDevice={deleteDevice}
                             />
+                            
                         ) : device.type === "whatsminer" ? (
                             <WhatsMinerCard
+                                key={device.id}
+                                device={device}
+                                onEditDevice={editDevice}
+                                onDeleteDevice={deleteDevice}
+                            />
+                        ) : device.type === "innosilicon" ? (
+                            <InnosiliconCard
                                 key={device.id}
                                 device={device}
                                 onEditDevice={editDevice}

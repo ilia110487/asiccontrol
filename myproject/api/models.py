@@ -6,6 +6,7 @@ class AsicDevice(models.Model):
     TYPE_CHOICES = [
         ('antminer', 'Antminer'),
         ('whatsminer', 'Whatsminer'),
+        ('innosilicon', 'Innosilicon'),
         # Добавьте другие типы устройств, если необходимо
     ]
 
@@ -13,7 +14,7 @@ class AsicDevice(models.Model):
     ip = models.CharField(max_length=200)  # IP-адрес устройства
     login = models.CharField(max_length=50)  # Логин для доступа к устройству
     password = models.CharField(max_length=50)  # Пароль для доступа к устройству
-    type = models.CharField(max_length=20, choices=TYPE_CHOICES)  # Тип устройства (Antminer, Wotsminer)
+    type = models.CharField(max_length=50, choices=TYPE_CHOICES)  # Тип устройства (Antminer, Wotsminer)
     created_at = models.DateTimeField(auto_now_add=True)  # Время добавления устройства
     fan_count = models.IntegerField(default=0)  # Добавлено поле fan_count
 
