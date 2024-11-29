@@ -1,52 +1,64 @@
-import requests
-
 def fetch_innosilicon_data(ip, username, password):
     """
-    Получает данные с устройства Innosilicon по указанному IP.
+    Получение данных с устройства Innosilicon.
     """
     try:
-        # Используем переданный токен (не генерируем его, так как он задан вручную)
-        token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJBc2ljTWluZXIiLCJpYXQiOjE3MzI4ODIxOTMsImV4cCI6MTczMjkwMzc5MywidXNlciI6ImFkbWluIn0.QW2bbxOuWt3XG2JbOcM9kfKc6iGS8bF7DQJaT7K-diI"
+        # Получение сессии (вместо токена)
+        session = get_new_token(ip, username, password)
+        if not session:
+            return {"error": "Не удалось получить новый токен"}
 
-        # Заголовки с токеном авторизации
-        headers = {
-            "Authorization": f"Bearer {token}",
-            "Content-Type": "application/json;charset=UTF-8",
-        }
-
-        # URL-адрес для получения данных
+        # URL для запроса данных
         url = f"{ip}/api/summary"
 
-        # Отправляем POST-запрос
-        response = requests.post(url, headers=headers, json={})
-
-        # Проверяем код состояния
-        if response.status_code != 200:
-            return {"error": f"Ошибка {response.status_code}: {response.text}"}
-
-        # Получаем JSON-данные
-        data = response.json()
-
-        # Проверяем успешность операции
-        if not data.get("success", False):
-            return {"error": "Устройство не вернуло данные, success = False"}
-
-        # Извлекаем ключевые метрики
-        devs = data.get("DEVS", [{}])
-        hardware = data.get("HARDWARE", {})
-        total_hash = data.get("TotalHash", {})
-
-        metrics = {
-            "hashrate": total_hash.get("Hash Rate", 0),
-            "unit": total_hash.get("Unit", "TH/s"),
-            "temperature": devs[0].get("Temperature", 0) if devs else 0,
-            "fan_duty": hardware.get("Fan duty", 0),
-            "status": devs[0].get("Status", "Unknown") if devs else "Unknown",
+        # Заголовки для запроса
+        headers = {
+            "Accept": "application/json",
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36",
         }
 
-        return {"metrics": metrics, "raw_data": data}
+        # Отправляем запрос
+        response = session.get(url, headers=headers, timeout=10)
+        data = response.json()
+
+        # Извлечение метрик
+        hashrate = data.get("TotalHash", {}).get("Hash Rate", 0)
+        unit = data.get("TotalHash", {}).get("Unit", "TH/s")
+        temperature = data.get("DEVS", [{}])[0].get("Temperature", 0)
+        fan_duty = data.get("HARDWARE", {}).get("Fan duty", 0)
+        status = data.get("DEVS", [{}])[0].get("Status", "Unknown")
+
+        # Дополнительные метрики
+        accepted_shares = data.get("DEVS", [{}])[0].get("Accepted", 0)
+        rejected_shares = data.get("DEVS", [{}])[0].get("Rejected", 0)
+        hardware_errors = data.get("DEVS", [{}])[0].get("Hardware Errors", 0)
+
+        # Вывод данных для отладки
+        print("Полный ответ сервера:", data)
+        print(f"Хэшрейт: {hashrate} {unit}")
+        print(f"Температура: {temperature}°C")
+        print(f"Скорость вентилятора: {fan_duty}%")
+        print(f"Статус устройства: {status}")
+        print(f"Принятые шары: {accepted_shares}")
+        print(f"Отклонённые шары: {rejected_shares}")
+        print(f"Ошибки оборудования: {hardware_errors}")
+
+        # Формируем результат
+        return {
+            "hashrate": hashrate,
+            "unit": unit,
+            "temperature": temperature,
+            "fan_duty": fan_duty,
+            "status": status,
+            "accepted_shares": accepted_shares,
+            "rejected_shares": rejected_shares,
+            "hardware_errors": hardware_errors,
+            "raw_data": data,
+        }
 
     except requests.exceptions.RequestException as e:
+        print(f"Сетевая ошибка: {e}")
         return {"error": f"Сетевая ошибка: {str(e)}"}
     except Exception as e:
+        print(f"Ошибка при выполнении запроса: {e}")
         return {"error": f"Ошибка при выполнении запроса: {str(e)}"}

@@ -22,10 +22,10 @@ const InnosiliconCard = ({ device, onEditDevice, onDeleteDevice }) => {
                 );
                 const data = await response.json();
                 setMinerData({
-                    type: data.DEVS && data.DEVS.length > 0 ? data.DEVS[0]?.Name || "Innosilicon" : "Innosilicon",
-                    hashrate: data.DEVS && data.DEVS.length > 0 ? data.DEVS[0]?.["Hash Rate"] || 0 : 0,
-                    fans: [data.HARDWARE?.["Fan duty"] || 0],
-                    temperature: data.DEVS && data.DEVS.length > 0 ? data.DEVS[0]?.Temperature || 0 : 0,
+                    type: device.type || "Innosilicon",
+                hashrate: data.DEVS?.[0]?.["Hash Rate"] || 0,
+                fans: [data.HARDWARE?.["Fan duty"] || 0],
+                temperature: data.DEVS?.[0]?.Temperature || 0,
                 });
             } catch (error) {
                 console.error("Ошибка загрузки данных:", error);
